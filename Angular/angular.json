@@ -31,7 +31,16 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/uikit/dist/js/uikit.min.js",
+              "./node_modules/uikit/dist/js/uikit-icons.min.js",
+              "./src/assets/js/custom.js",
+              "./src/assets/js/jquery-3.3.1.min.js",
+              "./src/assets/js/simplebar.js",
+              "./src/assets/js/tippy.all.min.js",
+              "./src/assets/js/uikit.js"
+            ]
           },
           "configurations": {
             "production": {
