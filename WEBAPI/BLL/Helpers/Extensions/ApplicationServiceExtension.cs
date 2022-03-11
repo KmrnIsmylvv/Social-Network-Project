@@ -1,4 +1,5 @@
-﻿using BLL.Interfaces;
+﻿using BLL.Helpers.Utils;
+using BLL.Interfaces;
 using BLL.Services;
 using BLL.Services.Repositories;
 using DAL.Data;
@@ -14,6 +15,8 @@ namespace BLL.Helpers.Extensions
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddDbContext<DataContext>(options =>
             {

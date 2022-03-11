@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
 namespace EntityLayer.Entities
 {
     public class AppUser
