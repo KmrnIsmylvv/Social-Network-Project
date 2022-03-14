@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTOs;
 using BLL.Helpers.Extensions;
+using BLL.Helpers.Utils;
 using BLL.Interfaces;
 using DAL.Data;
 using EntityLayer.Entities;
@@ -32,9 +33,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await _userRepository.GetMembersAsync();
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
+                users.TotalCount, users.TotalPages);
+
             return Ok(users);
         }
 
