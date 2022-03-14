@@ -33,13 +33,19 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
+            var user = await _userRepository.GetUserByUsername(User.GetUsername());
+            userParams.CurrentUsername = user.UserName;
+            
+            if (string.IsNullOrEmpty(userParams.Gender))
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+            
             var users = await _userRepository.GetMembersAsync(userParams);
-
+            
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
                 users.TotalCount, users.TotalPages);
-
+            
             return Ok(users);
         }
 
@@ -48,7 +54,7 @@ namespace API.Controllers
         {
             return await _userRepository.GetMemberAsync(username);
         }
-
+ 
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {

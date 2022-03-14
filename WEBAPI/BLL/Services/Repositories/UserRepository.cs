@@ -9,6 +9,7 @@ using BLL.Helpers.Utils;
 using BLL.Interfaces;
 using DAL.Data;
 using EntityLayer.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services.Repositories
@@ -55,11 +56,13 @@ namespace BLL.Services.Repositories
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            var query = _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .AsNoTracking();
-
-            return await PagedList<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+            var query = _context.Users.AsQueryable(); 
+            
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.Gender == userParams.Gender);
+            
+            return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<MemberDto> GetMemberAsync(string username)
