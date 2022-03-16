@@ -12,8 +12,6 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  loggedIn: boolean = false;
-
   constructor(private http: HttpClient) {
   }
 

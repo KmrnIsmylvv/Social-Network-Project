@@ -8,11 +8,11 @@ import {AccountService} from "../_services/account.service";
     '../../assets/css/tailwind.css', '../../assets/css/uikit.css']
 })
 export class LoginComponent implements OnInit {
-  model: any = {}
+  model: any = {};
 
-  // loggedIn: boolean = false;
+   loggedIn: boolean = false;
 
-  constructor(private accountService: AccountService) {
+  constructor(public accountService: AccountService) {
   }
 
   ngOnInit(): void {
@@ -22,15 +22,20 @@ export class LoginComponent implements OnInit {
   login() {
     this.accountService.login(this.model).subscribe(response => {
       console.log(response);
-      this.accountService.loggedIn = true;
+      this.loggedIn = true;
     }, error => {
       console.log(error);
     })
   }
 
+  // logout(){
+  //   this.accountService.logout();
+  //   this.loggedIn=false;
+  // }
+
   getCurrentUser() {
     this.accountService.currentUser$.subscribe(user => {
-      this.accountService.loggedIn = !!user;
+      this.loggedIn = !!user;
     }, error => {
       console.log(error);
     })

@@ -9,7 +9,7 @@ import {AccountService} from "../_services/account.service";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private  accountService: AccountService ) {
+  constructor() {
   }
 
   ngOnInit(): void {

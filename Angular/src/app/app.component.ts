@@ -12,8 +12,6 @@ export class AppComponent implements OnInit{
   title = 'Social Network';
   users: any;
 
-  loggedIn :boolean = false;
-
   constructor(private  http: HttpClient, private accountService: AccountService) {}
 
   ngOnInit(){
