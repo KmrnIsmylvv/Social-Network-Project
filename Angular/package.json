@@ -23,6 +23,7 @@
     "ionicons": "^6.0.1",
     "jquery": "^3.6.0",
     "ngx-bootstrap": "^8.0.0",
+    "ngx-toastr": "^14.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "uikit": "^3.11.1",

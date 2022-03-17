@@ -27,13 +27,24 @@ export class AccountService {
     )
   }
 
-  setCurrentUser(user :User){
+  register(model: any) {
+    return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
+      map((user: User) => {
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    )
+  }
+
+  setCurrentUser(user: User) {
     this.currentUserSource.next(user);
   }
 
-  // logout() {
-  //   localStorage.removeItem('user');
-  //   this.currentUserSource.next(null);
-  // }
+  logout() {
+    localStorage.removeItem('user');
+    this.currentUserSource.next(null);
+  }
 
 }

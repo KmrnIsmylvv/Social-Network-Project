@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {AccountService} from "../_services/account.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',
@@ -7,22 +9,22 @@ import {Component, OnInit} from '@angular/core';
     '../../assets/css/tailwind.css', '../../assets/css/uikit.css']
 })
 export class RegisterComponent implements OnInit {
-  loginMode = false;
+  // loginMode = false;
 
   model: any = {};
 
-  constructor() {
+  constructor(private accountService: AccountService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
   }
 
-  register(){
-    console.log(this.model);
+  register() {
+    this.accountService.register(this.model).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+      this.toastr.error(error.error);
+    })
   }
-
-  loginToggle() {
-    this.loginMode = !this.loginMode;
-  }
-
 }

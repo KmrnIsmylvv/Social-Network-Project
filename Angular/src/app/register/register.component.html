@@ -1,7 +1,7 @@
 <body class="bg-gray-100">
 
 
-<div *ngIf="!loginMode" id="wrapper" class="flex flex-col justify-between h-screen">
+<div id="wrapper" class="flex flex-col justify-between h-screen">
 
   <!-- header-->
   <div class="bg-white py-4 shadow dark:bg-gray-800">
@@ -44,9 +44,9 @@
           </div>
           <a href="#"> Terms and Conditions</a>
         </div>
-        <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Register</button>
+        <button type="submit" (submit)="register()" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Register</button>
         <div class="text-center mt-5 space-x-2">
-          <p class="text-base"> Do you have an account? <a (click)="loginToggle()"> Login </a></p>
+          <p class="text-base"> Do you have an account? <a [routerLink]="['../login']"> Login </a></p>
         </div>
       </form>
     </div>
@@ -66,10 +66,6 @@
     </div>
   </div>
 
-</div>
-
-<div *ngIf="loginMode">
-  <app-login></app-login>
 </div>
 
 <script>
