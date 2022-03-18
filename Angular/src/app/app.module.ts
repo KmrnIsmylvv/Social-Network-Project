@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 
 import {AppComponent} from './app.component';
@@ -16,8 +16,9 @@ import {MessagesComponent} from './messages/messages.component';
 import {SettingsComponent} from './settings/settings.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {ExploreDetailComponent} from './explore/explore-detail/explore-detail.component';
-import {ToastrModule} from "ngx-toastr";
 import {SharedModule} from "./_modules/shared.module";
+import {TestErrorsComponent} from './errors/test-errors/test-errors.component';
+import {ErrorInterceptor} from "./interceptors/error.interceptor";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {SharedModule} from "./_modules/shared.module";
     MessagesComponent,
     SettingsComponent,
     MyProfileComponent,
-    ExploreDetailComponent
+    ExploreDetailComponent,
+    TestErrorsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,9 @@ import {SharedModule} from "./_modules/shared.module";
     FormsModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

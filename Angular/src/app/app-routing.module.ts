@@ -11,6 +11,7 @@ import {SettingsComponent} from "./settings/settings.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {NavbarComponent} from "./navbar/navbar.component";
+import {TestErrorsComponent} from "./errors/test-errors/test-errors.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -30,7 +31,7 @@ const routes: Routes = [
       {path: 'navbar', component: NavbarComponent},
     ]
   },
-
+  {path: 'errors', component: TestErrorsComponent},
   {path: '**', component: FeedComponent, pathMatch: 'full'},
 ];
 
