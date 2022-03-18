@@ -10,17 +10,27 @@ import {MyProfileComponent} from "./my-profile/my-profile.component";
 import {SettingsComponent} from "./settings/settings.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {AuthGuard} from "./_guards/auth.guard";
+import {NavbarComponent} from "./navbar/navbar.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'explore', component: ExploreComponent, canActivate: [AuthGuard]},
-  {path: 'explore/:id', component: ExploreDetailComponent},
-  {path: 'feed', component: FeedComponent},
-  {path: 'messages', component: MessagesComponent},
-  {path: 'my-profile', component: MyProfileComponent},
-  {path: 'settings', component: SettingsComponent},
-  {path: 'sidebar', component: SidebarComponent},
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      {path: 'explore', component: ExploreComponent},
+      {path: 'explore/:id', component: ExploreDetailComponent},
+      {path: 'feed', component: FeedComponent},
+      {path: 'messages', component: MessagesComponent},
+      {path: 'my-profile', component: MyProfileComponent},
+      {path: 'settings', component: SettingsComponent},
+      {path: 'sidebar', component: SidebarComponent},
+      {path: 'navbar', component: NavbarComponent},
+    ]
+  },
+
   {path: '**', component: FeedComponent, pathMatch: 'full'},
 ];
 

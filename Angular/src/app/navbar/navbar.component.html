@@ -30,12 +30,12 @@
         </div>
         <div class="right-side lg:pr-4">
           <!-- upload -->
-              <a href="#"
-                 class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
-<!--                <ion-icon name="add-circle" class="-mb-1-->
-<!--                                       mr-1 opacity-90 text-xl uilus-circle"></ion-icon> Upload-->
-                Upload
-              </a>
+          <a href="#"
+             class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
+            <!--                            <ion-icon name="add-circle" class="-mb-1-->
+            <!--                                                   mr-1 opacity-90 text-xl uilus-circle"></ion-icon> Upload-->
+            Upload
+          </a>
           <!-- upload dropdown box -->
           <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
                class="header_dropdown">
@@ -278,7 +278,7 @@
               <li><a href="#"> Account setting </a></li>
               <li><a href="#"> Payments </a></li>
               <li><a href="#"> Help </a></li>
-              <li><a> Log Out</a></li>
+              <li><a (click)="logout()"> Log Out</a></li>
             </ul>
           </div>
         </div>

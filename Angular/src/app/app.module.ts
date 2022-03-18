@@ -17,6 +17,7 @@ import {SettingsComponent} from './settings/settings.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {ExploreDetailComponent} from './explore/explore-detail/explore-detail.component';
 import {ToastrModule} from "ngx-toastr";
+import {SharedModule} from "./_modules/shared.module";
 
 
 @NgModule({
@@ -39,9 +40,7 @@ import {ToastrModule} from "ngx-toastr";
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
-    })
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

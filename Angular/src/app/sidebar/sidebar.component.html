@@ -20,7 +20,7 @@
           <img src="../../assets/images/avatars/avatar-2.jpg"
                class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
         </div>
-        <a [routerLink]="['../my-profile']" class="text-xl font-medium capitalize mt-4 uk-link-reset"> Stella Johnson
+        <a [routerLink]="['../my-profile']" class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{user.username | titlecase}}
         </a>
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
           <div>
@@ -93,7 +93,7 @@
           <hr class="my-2">
         </li>
         <li>
-          <a [routerLink]="['../login']">
+          <a (click)="logout()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

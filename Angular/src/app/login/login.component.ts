@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getCurrentUser();
   }
 
   login() {
@@ -27,11 +26,6 @@ export class LoginComponent implements OnInit {
       console.log(error);
       this.toastr.error(error.error);
     })
-  }
-
-  logout(){
-    this.accountService.logout();
-    this.router.navigateByUrl('/login');
   }
 
   // getCurrentUser() {
