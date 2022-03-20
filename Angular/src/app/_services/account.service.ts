@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {map, ReplaySubject} from "rxjs";
 import {readSpanComment} from "@angular/compiler-cli/src/ngtsc/typecheck/src/comments";
 import {User} from "../_models/user";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
