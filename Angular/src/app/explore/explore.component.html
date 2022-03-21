@@ -1,1 +1,63 @@
-<p>explore works!</p>
+<body>
+<div id="wrapper">
+  <div class="main_content">
+    <div class="container m-auto">
+
+      <h1 class="lg:lg:text-2xl text-lg text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-3">
+        Explore </h1>
+
+      <div class="row">
+        <div *ngFor="let member of members" class="col-2 d-flex">
+          <app-member-cards [member]="member"></app-member-cards>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  (function (window, document, undefined) {
+    'use strict';
+    if (!('localStorage' in window)) return;
+    var nightMode = localStorage.getItem('gmtNightMode');
+    if (nightMode) {
+      document.documentElement.className += ' dark';
+    }
+  })(window, document);
+
+
+  (function (window, document, undefined) {
+
+    'use strict';
+
+    // Feature test
+    if (!('localStorage' in window)) return;
+
+    // Get our newly insert toggle
+    var nightMode = document.querySelector('#night-mode');
+    if (!nightMode) return;
+
+    // When clicked, toggle night mode on or off
+    nightMode.addEventListener('click', function (event) {
+      event.preventDefault();
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('gmtNightMode', true);
+        return;
+      }
+      localStorage.removeItem('gmtNightMode');
+    }, false);
+
+  })(window, document);
+</script>
+
+<!-- Scripts
+   ================================================== -->
+<script src="../../assets/js/tippy.all.min.js"></script>
+<script src="../../assets/js/jquery-3.3.1.min.js"></script>
+<script src="../../assets/js/uikit.js"></script>
+<script src="../../assets/js/simplebar.js"></script>
+<script src="../../assets/js/custom.js"></script>
+</body>

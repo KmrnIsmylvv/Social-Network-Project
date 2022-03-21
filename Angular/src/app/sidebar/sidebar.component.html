@@ -20,7 +20,7 @@
           <img src="../../assets/images/avatars/avatar-2.jpg"
                class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
         </div>
-        <a [routerLink]="['../my-profile']" class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{user.username | titlecase}}
+        <a [routerLink]="['../my-profile']" class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{this.user.username | titlecase}}
         </a>
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
           <div>
@@ -69,7 +69,7 @@
             <span> Messages </span> <span class="nav-tag"> 3</span> </a>
         </li>
         <li>
-          <a [routerLink]="['../settings']">
+          <a [routerLink]="['../settings']" >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

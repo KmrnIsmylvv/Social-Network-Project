@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.accountService.register(this.model).subscribe(response => {
-
       this.router.navigateByUrl('/sidebar');
     }, error => {
       this.toastr.error(error.error);

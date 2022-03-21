@@ -2,8 +2,6 @@ import {NgModule} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
-import {ExploreComponent} from "./explore/explore.component";
-import {ExploreDetailComponent} from "./explore/explore-detail/explore-detail.component";
 import {FeedComponent} from "./feed/feed.component";
 import {MessagesComponent} from "./messages/messages.component";
 import {MyProfileComponent} from "./my-profile/my-profile.component";
@@ -14,6 +12,8 @@ import {NavbarComponent} from "./navbar/navbar.component";
 import {TestErrorsComponent} from "./errors/test-errors/test-errors.component";
 import {NotFoundComponent} from "./errors/not-found/not-found.component";
 import {ServerErrorComponent} from "./errors/server-error/server-error.component";
+import {ExploreComponent} from "./explore/explore.component";
+import {ExploreDetailComponent} from "./explore-detail/explore-detail.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
