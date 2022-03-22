@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../_services/account.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Member} from "../_models/member";
+import {MembersService} from "../_services/members.service";
+import {AuthGuard} from "../_guards/auth.guard";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-sidebar',
@@ -9,14 +13,15 @@ import {Router} from "@angular/router";
     '../../assets/css/tailwind.css', '../../assets/css/uikit.css']
 })
 export class SidebarComponent implements OnInit {
-  user: any = this.accountService.currentUser$;
 
-  constructor(private accountService: AccountService,private router: Router) { }
+  constructor(private accountService: AccountService, private memberService: MembersService,
+              private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
-  logout(){
+  logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/login');
   }

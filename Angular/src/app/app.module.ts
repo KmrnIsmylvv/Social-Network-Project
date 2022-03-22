@@ -23,6 +23,7 @@ import {ExploreComponent} from "./explore/explore.component";
 import { ExploreDetailComponent } from './explore-detail/explore-detail.component';
 import { MemberCardsComponent } from './member-cards/member-cards.component';
 import {JwtInterceptor} from "./_interceptor/jwt.interceptor";
+import { SettingsPhotoComponent } from './settings-photo/settings-photo.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {JwtInterceptor} from "./_interceptor/jwt.interceptor";
     NotFoundComponent,
     ServerErrorComponent,
     ExploreDetailComponent,
-    MemberCardsComponent
+    MemberCardsComponent,
+    SettingsPhotoComponent
   ],
   imports: [
     BrowserModule,

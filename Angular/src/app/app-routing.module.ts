@@ -14,6 +14,7 @@ import {NotFoundComponent} from "./errors/not-found/not-found.component";
 import {ServerErrorComponent} from "./errors/server-error/server-error.component";
 import {ExploreComponent} from "./explore/explore.component";
 import {ExploreDetailComponent} from "./explore-detail/explore-detail.component";
+import {SettingsPhotoComponent} from "./settings-photo/settings-photo.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
       {path: 'my-profile', component: MyProfileComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'sidebar', component: SidebarComponent},
+      {path: 'settings-photo', component: SettingsPhotoComponent},
       {path: 'navbar', component: NavbarComponent},
     ]
   },

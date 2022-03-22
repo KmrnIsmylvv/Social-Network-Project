@@ -1,1 +1,110 @@
-<p>settings works!</p>
+<body>
+<div id="wrapper">
+  <div class="main_content">
+    <div class="container m-auto">
+
+      <h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Account Setting </h1>
+      <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
+        <li class="uk-active"><a [routerLink]="['../settings']">Profile</a></li>
+        <li><a [routerLink]="['../settings-photo']">Photos</a></li>
+      </ul>
+
+      <div class="grid lg:grid-cols-3 mt-12 gap-8">
+        <div>
+          <h3 class="text-xl mb-2"> Basic</h3>
+          <p> Lorem ipsum dolor sit amet nibh consectetuer adipiscing elit</p>
+        </div>
+        <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
+
+          <form>
+            <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
+              <div class="col-span-2">
+                <label for="username"> Username</label>
+                <input [(ngModel)]="member.knownAs" disabled name="username" id="username" type="text"
+                       placeholder="Your name.."
+                       class="shadow-none bg-gray-100">
+              </div>
+              <div class="col-span-2">
+                <label for="introduction"> Intoduction</label>
+                <textarea [(ngModel)]="member.introduction" id="introduction" type="text"
+                          class="shadow-none bg-gray-100"></textarea>
+              </div>
+              <div class="col-span-2">
+                <label for="interests">About me</label>
+                <textarea [(ngModel)]="member.interests" id="interests" name="interests" rows="3"
+                          class="shadow-none bg-gray-100"></textarea>
+              </div>
+              <div class="">
+                <label for="country"> Country</label>
+                <input [(ngModel)]="member.country" type="text" name="country" id="country" placeholder=""
+                       class="shadow-none bg-gray-100">
+              </div>
+              <div class="">
+                <label for="city"> City</label>
+                <input [(ngModel)]="member.city" type="text" name="city" id="city" placeholder=""
+                       class="shadow-none bg-gray-100">
+              </div>
+              <div>
+                <label> Working at</label>
+                <input type="text" placeholder="" class="shadow-none bg-gray-100">
+              </div>
+            </div>
+          </form>
+
+
+          <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
+            <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel</button>
+            <button type="button" class="button bg-blue-700"> Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  (function (window, document, undefined) {
+    'use strict';
+    if (!('localStorage' in window)) return;
+    var nightMode = localStorage.getItem('gmtNightMode');
+    if (nightMode) {
+      document.documentElement.className += ' dark';
+    }
+  })(window, document);
+
+
+  (function (window, document, undefined) {
+
+    'use strict';
+
+    // Feature test
+    if (!('localStorage' in window)) return;
+
+    // Get our newly insert toggle
+    var nightMode = document.querySelector('#night-mode');
+    if (!nightMode) return;
+
+    // When clicked, toggle night mode on or off
+    nightMode.addEventListener('click', function (event) {
+      event.preventDefault();
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('gmtNightMode', true);
+        return;
+      }
+      localStorage.removeItem('gmtNightMode');
+    }, false);
+
+  })(window, document);
+</script>
+
+<!-- Scripts
+   ================================================== -->
+<script src="../../assets/js/tippy.all.min.js"></script>
+<script src="../../assets/js/jquery-3.3.1.min.js"></script>
+<script src="../../assets/js/uikit.js"></script>
+<script src="../../assets/js/simplebar.js"></script>
+<script src="../../assets/js/custom.js"></script>
+
+</body>
