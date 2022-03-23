@@ -15,6 +15,7 @@ import {ServerErrorComponent} from "./errors/server-error/server-error.component
 import {ExploreComponent} from "./explore/explore.component";
 import {ExploreDetailComponent} from "./explore-detail/explore-detail.component";
 import {SettingsPhotoComponent} from "./settings-photo/settings-photo.component";
+import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -29,7 +30,7 @@ const routes: Routes = [
       {path: 'feed', component: FeedComponent},
       {path: 'messages', component: MessagesComponent},
       {path: 'my-profile', component: MyProfileComponent},
-      {path: 'settings', component: SettingsComponent},
+      {path: 'settings', component: SettingsComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'sidebar', component: SidebarComponent},
       {path: 'settings-photo', component: SettingsPhotoComponent},
       {path: 'navbar', component: NavbarComponent},

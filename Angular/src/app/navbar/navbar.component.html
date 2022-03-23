@@ -271,13 +271,11 @@
           <!-- profile -->
 
           <a href="#">
-            <img src="../../assets/images/avatars/avatar-2.jpg" class="header-avatar" alt="">
+            <img src="{{member.photoUrl}}" class="header-avatar" alt="">
           </a>
           <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
             <ul>
-              <li><a href="#"> Account setting </a></li>
-              <li><a href="#"> Payments </a></li>
-              <li><a href="#"> Help </a></li>
+              <li><a [routerLink]="['../settings']"> Account setting </a></li>
               <li><a (click)="logout()"> Log Out</a></li>
             </ul>
           </div>

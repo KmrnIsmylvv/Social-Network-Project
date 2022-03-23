@@ -10,43 +10,40 @@
       </ul>
 
       <div class="grid lg:grid-cols-3 mt-12 gap-8">
-        <div>
-          <h3 class="text-xl mb-2"> Basic</h3>
-          <p> Lorem ipsum dolor sit amet nibh consectetuer adipiscing elit</p>
+        <div *ngIf="editForm.dirty" class="alert-danger text-center" style="height: 100px; width: 290px">
+          <h3 class="text-xl mb-2"><strong>Warning</strong> </h3>
+          <p> You have made changes. Any unsaved changes will be lost</p>
         </div>
+
         <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
 
-          <form>
+          <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
             <div class="grid grid-cols-2 gap-3 lg:p-6 p-4">
-              <div class="col-span-2">
+              <div *ngIf="member" class="col-span-2">
                 <label for="username"> Username</label>
-                <input [(ngModel)]="member.knownAs" disabled name="username" id="username" type="text"
+                <input [(ngModel)]="member.knownAs" name="knownAs" disabled id="username" type="text"
                        placeholder="Your name.."
                        class="shadow-none bg-gray-100">
               </div>
-              <div class="col-span-2">
+              <div *ngIf="member" class="col-span-2">
                 <label for="introduction"> Intoduction</label>
-                <textarea [(ngModel)]="member.introduction" id="introduction" type="text"
+                <textarea [(ngModel)]="member.introduction" name="introduction" id="introduction" type="text"
                           class="shadow-none bg-gray-100"></textarea>
               </div>
-              <div class="col-span-2">
+              <div *ngIf="member" class="col-span-2">
                 <label for="interests">About me</label>
-                <textarea [(ngModel)]="member.interests" id="interests" name="interests" rows="3"
+                <textarea [(ngModel)]="member.interests" name="interests" id="interests" rows="3"
                           class="shadow-none bg-gray-100"></textarea>
               </div>
-              <div class="">
+              <div *ngIf="member" class="">
                 <label for="country"> Country</label>
-                <input [(ngModel)]="member.country" type="text" name="country" id="country" placeholder=""
+                <input [(ngModel)]="member.country" name="country" type="text" id="country" placeholder=""
                        class="shadow-none bg-gray-100">
               </div>
-              <div class="">
+              <div *ngIf="member" class="">
                 <label for="city"> City</label>
-                <input [(ngModel)]="member.city" type="text" name="city" id="city" placeholder=""
+                <input [(ngModel)]="member.city" name="city" type="text" id="city" placeholder=""
                        class="shadow-none bg-gray-100">
-              </div>
-              <div>
-                <label> Working at</label>
-                <input type="text" placeholder="" class="shadow-none bg-gray-100">
               </div>
             </div>
           </form>
@@ -54,7 +51,7 @@
 
           <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
             <button class="p-2 px-4 rounded bg-gray-50 text-red-500"> Cancel</button>
-            <button type="button" class="button bg-blue-700"> Save</button>
+            <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="button bg-blue-700"> Save</button>
           </div>
         </div>
       </div>
