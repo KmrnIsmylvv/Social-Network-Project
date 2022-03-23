@@ -17,13 +17,15 @@ import {MyProfileComponent} from './my-profile/my-profile.component'
 import {SharedModule} from "./_modules/shared.module";
 import {TestErrorsComponent} from './errors/test-errors/test-errors.component';
 import {ErrorInterceptor} from "./_interceptor/error.interceptor";
-import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import {NotFoundComponent} from './errors/not-found/not-found.component';
+import {ServerErrorComponent} from './errors/server-error/server-error.component';
 import {ExploreComponent} from "./explore/explore.component";
-import { ExploreDetailComponent } from './explore-detail/explore-detail.component';
-import { MemberCardsComponent } from './member-cards/member-cards.component';
+import {ExploreDetailComponent} from './explore-detail/explore-detail.component';
+import {MemberCardsComponent} from './member-cards/member-cards.component';
 import {JwtInterceptor} from "./_interceptor/jwt.interceptor";
-import { SettingsPhotoComponent } from './settings-photo/settings-photo.component';
+import {SettingsPhotoComponent} from './settings-photo/settings-photo.component';
+import {NgxSpinnerModule} from "ngx-spinner";
+import {LoadingInterceptor} from "./_interceptor/loading.interceptor";
 
 
 @NgModule({
@@ -51,11 +53,13 @@ import { SettingsPhotoComponent } from './settings-photo/settings-photo.componen
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

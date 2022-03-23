@@ -32,7 +32,8 @@
               "src/styles.css",
               "./node_modules/ionicons/dist/ionicons.js",
               "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/font-awesome/css/font-awesome.css"
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "./node_modules/ngx-spinner/animations/ball-scale.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
