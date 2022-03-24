@@ -23,6 +23,7 @@
     "font-awesome": "^4.7.0",
     "ionicons": "^6.0.1",
     "jquery": "^3.6.0",
+    "ng2-file-upload": "^1.4.0",
     "ngx-bootstrap": "^8.0.0",
     "ngx-spinner": "^13.1.1",
     "ngx-toastr": "^14.2.2",

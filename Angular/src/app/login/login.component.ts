@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.model).subscribe(response => {
       console.log(response);
       this.router.navigateByUrl('/sidebar');
+    }, error => {
+      this.toastr.error('Invalid username or password');
     })
   }
 

@@ -33,7 +33,11 @@
               "./node_modules/ionicons/dist/ionicons.js",
               "./node_modules/ngx-toastr/toastr.css",
               "./node_modules/font-awesome/css/font-awesome.css",
-              "./node_modules/ngx-spinner/animations/ball-scale.css"
+              "./node_modules/ngx-spinner/animations/ball-scale.css",
+              "./node_modules/uikit/dist/css/uikit.css",
+              "./node_modules/uikit/dist/css/uikit-core.css",
+              "./node_modules/uikit/dist/css/uikit-core-rtl.css",
+              "./node_modules/uikit/dist/css/uikit-rtl.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
