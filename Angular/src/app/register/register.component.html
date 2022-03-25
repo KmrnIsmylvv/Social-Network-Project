@@ -16,7 +16,8 @@
 
         <div class="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
           <a [routerLink]="['../login']" class="py-3 px-4">Login</a>
-          <a [routerLink]="['../register']" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Register</a>
+          <a [routerLink]="['../register']"
+             class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Register</a>
         </div>
 
       </div>
@@ -29,14 +30,58 @@
     <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
       <h1 class="lg:text-3xl text-xl font-semibold mb-6"> Register</h1>
       <p class="mb-2 text-black text-lg"> Register to manage your account </p>
-      <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
-        <div class="flex lg:flex-row flex-col lg:space-x-2">
-          <input [(ngModel)]="model.username" type="text" placeholder="Username"  class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-<!--          <input type="text" placeholder="Last Name" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">-->
+      <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
+        <div class="flex-col lg:space-x-2">
+          <input
+            [class.is-valid]='registerForm.get("username").errors
+                  && registerForm.get("username").touched'
+            formControlName='username'
+            type="text"
+            placeholder="Username"
+            class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800"
+            style="border: 1px solid #d3d5d8 !important;">
+<!--          <span class="" style="color: red">Please enter a username</span>-->
+
         </div>
-<!--        <input type="text" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">-->
-        <input [(ngModel)]="model.password" type="password" placeholder="Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-<!--        <input type="text" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">-->
+        <!--        <input type="text" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">-->
+        <div class=" flex-col lg:space-x-2">
+          <input
+            [class.is-valid]='registerForm.get("password").errors
+                  && registerForm.get("password").touched'
+            formControlName='password'
+            type="password"
+            placeholder="Password"
+            class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800"
+            style="border: 1px solid #d3d5d8 !important;">
+<!--          <span *ngIf="registerForm.get('password').hasError('required')"-->
+<!--                class="" style="color: red">Please enter a password-->
+<!--          </span>-->
+          <span *ngIf="registerForm.get('password').hasError('minlength')"
+                class="" style="color: red">Password must be at least 4 characters
+          </span>
+          <span *ngIf="registerForm.get('password').hasError('maxlength')"
+                class="" style="color: red">Password must be at most 8 characters
+          </span>
+        </div>
+
+        <div class=" flex-col lg:space-x-2">
+          <input
+            [class.is-valid]='registerForm.get("confirmPassword").errors
+                  && registerForm.get("confirmPassword").touched'
+            formControlName='confirmPassword'
+            type="password"
+            placeholder="Confirm Password"
+            class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800"
+            style="border: 1px solid #d3d5d8 !important;">
+<!--          <span *ngIf="registerForm.get('confirmPassword').hasError('required')"-->
+<!--                class="" style="color: red">Please enter a confirm password-->
+<!--          </span>-->
+          <span *ngIf="registerForm.get('confirmPassword').hasError('isMatch')"
+                class="" style="color: red">Confirm password must match password
+          </span>
+        </div>
+
+
         <div class="flex justify-start my-4 space-x-1">
           <div class="checkbox">
             <input type="checkbox" id="chekcbox1" checked>
@@ -44,11 +89,17 @@
           </div>
           <a href="#"> Terms and Conditions</a>
         </div>
-        <button type="submit" (submit)="register()" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Register</button>
+        <button type="submit" (submit)="register()"
+                class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Register
+        </button>
         <div class="text-center mt-5 space-x-2">
           <p class="text-base"> Do you have an account? <a [routerLink]="['../login']"> Login </a></p>
         </div>
       </form>
+
+      <p>Form Value: {{registerForm.value | json}}}</p>
+      <p>Form Status: {{registerForm.status | json}}}</p>
+
     </div>
   </div>
 

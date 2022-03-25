@@ -20,7 +20,7 @@ namespace API
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-            
+
             try
             {
                 var context = services.GetRequiredService<DataContext>();
@@ -33,7 +33,7 @@ namespace API
                 logger.LogError(ex, "An error occured during the migration");
             }
 
-            await host.RunAsync(); 
+            await host.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
