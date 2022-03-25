@@ -31,56 +31,36 @@
       <h1 class="lg:text-3xl text-xl font-semibold mb-6"> Register</h1>
       <p class="mb-2 text-black text-lg"> Register to manage your account </p>
       <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
-        <div class="flex-col lg:space-x-2">
-          <input
-            [class.is-valid]='registerForm.get("username").errors
-                  && registerForm.get("username").touched'
-            formControlName='username'
-            type="text"
-            placeholder="Username"
-            class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800"
-            style="border: 1px solid #d3d5d8 !important;">
-<!--          <span class="" style="color: red">Please enter a username</span>-->
 
+        <div class="form-check form-check-inline">
+          <label class="mb-4">I am a:</label>
+          <input class="form-check-input mb-4 ml-2" type="radio" formControlName="gender" name="inlineRadioOptions"
+                 id="inlineRadio1" value="male">
+          <label class="form-check-label mb-4 " for="inlineRadio1"> Male</label>
         </div>
+        <div class="form-check form-check-inline ">
+          <input class="form-check-input " type="radio" formControlName="gender" name="inlineRadioOptions"
+                 id="inlineRadio2" value="female">
+          <label class="form-check-label mt-2" for="inlineRadio2"> Female</label>
+        </div>
+
+
+        <app-text-input [formControl]='$any(registerForm).controls["username"]'
+                        [label]='"Username"'></app-text-input>
+        <app-text-input [formControl]='$any(registerForm).controls["knownAs"]'
+                        [label]='"Known As"'></app-text-input>
+        <app-date-input [formControl]='$any(registerForm).controls["dateOfBirth"]'
+                        [label]='"Date Of Birth"'></app-date-input>
+        <app-text-input [formControl]='$any(registerForm).controls["city"]'
+                        [label]='"City"'></app-text-input>
+        <app-text-input [formControl]='$any(registerForm).controls["country"]'
+                        [label]='"Country"'></app-text-input>
+        <app-text-input [formControl]='$any(registerForm).controls["password"]' [label]='"Password"'
+                        [type]='"password"'></app-text-input>
+        <app-text-input [formControl]='$any(registerForm).controls["confirmPassword"]' [label]='"Confirm Password"'
+                        [type]='"password"'></app-text-input>
+
         <!--        <input type="text" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">-->
-        <div class=" flex-col lg:space-x-2">
-          <input
-            [class.is-valid]='registerForm.get("password").errors
-                  && registerForm.get("password").touched'
-            formControlName='password'
-            type="password"
-            placeholder="Password"
-            class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800"
-            style="border: 1px solid #d3d5d8 !important;">
-<!--          <span *ngIf="registerForm.get('password').hasError('required')"-->
-<!--                class="" style="color: red">Please enter a password-->
-<!--          </span>-->
-          <span *ngIf="registerForm.get('password').hasError('minlength')"
-                class="" style="color: red">Password must be at least 4 characters
-          </span>
-          <span *ngIf="registerForm.get('password').hasError('maxlength')"
-                class="" style="color: red">Password must be at most 8 characters
-          </span>
-        </div>
-
-        <div class=" flex-col lg:space-x-2">
-          <input
-            [class.is-valid]='registerForm.get("confirmPassword").errors
-                  && registerForm.get("confirmPassword").touched'
-            formControlName='confirmPassword'
-            type="password"
-            placeholder="Confirm Password"
-            class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800"
-            style="border: 1px solid #d3d5d8 !important;">
-<!--          <span *ngIf="registerForm.get('confirmPassword').hasError('required')"-->
-<!--                class="" style="color: red">Please enter a confirm password-->
-<!--          </span>-->
-          <span *ngIf="registerForm.get('confirmPassword').hasError('isMatch')"
-                class="" style="color: red">Confirm password must match password
-          </span>
-        </div>
-
 
         <div class="flex justify-start my-4 space-x-1">
           <div class="checkbox">

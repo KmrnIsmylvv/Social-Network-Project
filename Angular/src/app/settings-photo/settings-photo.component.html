@@ -1,0 +1,36 @@
+<body>
+<div id="wrapper">
+  <div class="main_content">
+    <div *ngIf="member" class="container pro-container m-auto">
+
+      <h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"> Account Setting </h1>
+      <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
+        <li><a [routerLink]="['../settings']">Profile</a></li>
+        <li class="uk-active"><a [routerLink]="['../settings-photo']">Photos</a></li>
+      </ul>
+
+      <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
+        <div *ngFor="let photo of photos">
+          <div *ngIf="member"
+               class="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle"
+               tabindex="0">
+            <img src="{{photo.url}}" class="w-full h-full absolute object-cover inset-0">
+            <div
+              class="absolute bg-black bg-opacity-40 bottom-0 flex h-full items-center justify-center space-x-5 text-lg text-white uk-transition-scale-up w-full">
+              <button
+                [disabled]="photo.isMain"
+                (click)="setMainPhoto(photo)"
+                class="btn btn-success btn-sm">Profile Photo
+              </button>
+              <button
+                [disabled]="photo.isMain"
+                (click)="deletePhoto(photo.id)"
+                class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

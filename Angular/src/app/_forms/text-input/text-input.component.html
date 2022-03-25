@@ -1,0 +1,26 @@
+<div  class=" flex-col lg:space-x-2">
+  <input
+    [class.is-valid]="ngControl.touched && ngControl.invalid"
+    type="{{type}}"
+    placeholder="{{label}}"
+    [formControl]="$any(ngControl.control)"
+    class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800 "
+    style="border: 1px solid #d3d5d8 !important;">
+
+  <span *ngIf="ngControl.control.errors?.minlength"
+        style="color: red">{{label}} must be at least {{ngControl.control.errors.minlength['requiredLength']}}
+  </span>
+  <span *ngIf="ngControl.control.errors?.maxlength"
+        style="color: red">{{label}} must be at most {{ngControl.control.errors.maxlength['requiredLength']}}
+  </span>
+  <span *ngIf="ngControl.control.errors?.isMatch"
+        style="color: red">Password do not match
+  </span>
+</div>
+
+<!--<span *ngIf="ngControl.control.errors?.required"-->
+<!--      class="" style="color: red">Please enter a {{label}}-->
+<!--  </span>-->
+
+
+

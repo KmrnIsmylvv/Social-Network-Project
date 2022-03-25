@@ -1,0 +1,13 @@
+<div class="flex-col lg:space-x-2">
+  <input
+    type="text"
+    [class.is-invalid]='ngControl.touched && ngControl.invalid'
+    class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800 "
+    [formControl]='$any(ngControl.control)'
+    placeholder="{{label}}"
+    bsDatepicker
+    [bsConfig]='bsConfig'
+    [maxDate]='maxDate'
+  >
+  <span *ngIf="ngControl.control.errors?.required" style="color: red">{{label}} is required</span>
+</div>

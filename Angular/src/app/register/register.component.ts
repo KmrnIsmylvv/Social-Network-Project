@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../_services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
-import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {canMigrateFile} from "@angular/core/schematics/utils/typescript/compiler_host";
 
 @Component({
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private accountService: AccountService, private toastr: ToastrService,
-              private router: Router) {
+              private router: Router, private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -24,11 +24,16 @@ export class RegisterComponent implements OnInit {
   }
 
   initializeForm() {
-    this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required,
-        Validators.minLength(4), Validators.maxLength(8)]),
-      confirmPassword: new FormControl('', [Validators.required, this.matchValues('password')])
+    this.registerForm = this.fb.group({
+      gender: ['male'],
+      username: ['', Validators.required],
+      knownAs: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      password: ['', [Validators.required,
+        Validators.minLength(4), Validators.maxLength(8)]],
+      confirmPassword: ['', [Validators.required, this.matchValues('password')]]
     })
   }
 

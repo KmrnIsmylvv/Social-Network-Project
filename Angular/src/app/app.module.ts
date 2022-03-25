@@ -26,6 +26,8 @@ import {JwtInterceptor} from "./_interceptor/jwt.interceptor";
 import {SettingsPhotoComponent} from './settings-photo/settings-photo.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {LoadingInterceptor} from "./_interceptor/loading.interceptor";
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import {LoadingInterceptor} from "./_interceptor/loading.interceptor";
     ServerErrorComponent,
     ExploreDetailComponent,
     MemberCardsComponent,
-    SettingsPhotoComponent
+    SettingsPhotoComponent,
+    TextInputComponent,
+    DateInputComponent
   ],
   imports: [
     BrowserModule,
