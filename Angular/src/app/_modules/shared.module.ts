@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ToastrModule} from "ngx-toastr";
 import {FileUploadModule} from "ng2-file-upload";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import {PaginationModule} from "ngx-bootstrap/pagination";
 
 
 @NgModule({
@@ -13,12 +14,14 @@ import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
       positionClass: 'toast-bottom-right'
     }),
     FileUploadModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   exports: [
     ToastrModule,
     FileUploadModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule
   ]
 })
 export class SharedModule {
