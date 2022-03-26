@@ -3,6 +3,30 @@
   <div class="main_content">
     <div class="container m-auto">
 
+      <div class="text-center mt-3">
+        <b><h1>Explore Result - <strong>{{pagination?.totalItems}}</strong> people found</h1></b>
+      </div>
+
+      <div class="container mt-3">
+        <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
+          <div class="form-group">
+            <label>Age from: </label>
+            <input type="number" class="form-control ml-1" style="width: 70px; height: 35px" name="minAge"
+                   [(ngModel)]="userParams.minAge">
+          </div>
+
+          <div class="form-group px-2">
+            <label>Age to: </label>
+            <input type="number" class="form-control ml-1" style="width: 70px; height: 35px" name="maxAge"
+                   [(ngModel)]="userParams.maxAge">
+          </div>
+
+          <button class="btn btn-primary ml-1" type="submit">Apply Filters</button>
+          <button (click)="resetFilters()" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+
+        </form>
+      </div>
+
       <h1 class="lg:lg:text-2xl text-lg text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-3">
         Explore </h1>
 
@@ -15,7 +39,7 @@
   </div>
 </div>
 
-<div  class="d-flex justify-content-center" *ngIf="pagination">
+<div class="d-flex justify-content-center" *ngIf="pagination">
   <pagination
     [boundaryLinks]="true"
     [totalItems]="pagination.totalItems"
