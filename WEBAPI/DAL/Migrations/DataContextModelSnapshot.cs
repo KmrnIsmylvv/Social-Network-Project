@@ -34,6 +34,9 @@ namespace DAL.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Gender")
                         .HasColumnType("TEXT");
 

@@ -30,18 +30,18 @@
     <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
       <h1 class="lg:text-3xl text-xl font-semibold mb-6"> Register</h1>
       <p class="mb-2 text-black text-lg"> Register to manage your account </p>
-      <form [formGroup]='registerForm' (ngSubmit)="register()" autocomplete="off">
+      <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" autocomplete="off">
 
         <div class="form-check form-check-inline">
           <label class="mb-4">I am a:</label>
-          <input class="form-check-input mb-4 ml-2" type="radio" formControlName="gender" name="inlineRadioOptions"
+          <input class="form-check-input mb-4 ml-2" type="radio" formControlName="gender"
                  id="inlineRadio1" value="male">
-          <label class="form-check-label mb-4 " for="inlineRadio1"> Male</label>
+          <label class="form-check-label mb-4 "> Male</label>
         </div>
         <div class="form-check form-check-inline ">
-          <input class="form-check-input " type="radio" formControlName="gender" name="inlineRadioOptions"
+          <input class="form-check-input " type="radio" formControlName="gender"
                  id="inlineRadio2" value="female">
-          <label class="form-check-label mt-2" for="inlineRadio2"> Female</label>
+          <label class="form-check-label mt-2"> Female</label>
         </div>
 
 
@@ -49,8 +49,10 @@
                         [label]='"Username"'></app-text-input>
         <app-text-input [formControl]='$any(registerForm).controls["knownAs"]'
                         [label]='"Known As"'></app-text-input>
+        <app-text-input [formControl]='$any(registerForm).controls["email"]'
+                        [label]='"Email"'></app-text-input>
         <app-date-input [formControl]='$any(registerForm).controls["dateOfBirth"]'
-                        [label]='"Date Of Birth"'></app-date-input>
+                        [label]='"Date Of Birth"' [maxDate]="maxDate"></app-date-input>
         <app-text-input [formControl]='$any(registerForm).controls["city"]'
                         [label]='"City"'></app-text-input>
         <app-text-input [formControl]='$any(registerForm).controls["country"]'
@@ -69,17 +71,20 @@
           </div>
           <a href="#"> Terms and Conditions</a>
         </div>
-        <button type="submit" (submit)="register()"
+
+        <div class="row " *ngIf="validationErrors.length > 0">
+          <ul class="text-danger">
+            <li *ngFor="let error of validationErrors"> {{ error }}</li>
+          </ul>
+        </div>
+
+        <button [disabled]="!registerForm.valid" type="submit"
                 class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Register
         </button>
         <div class="text-center mt-5 space-x-2">
           <p class="text-base"> Do you have an account? <a [routerLink]="['../login']"> Login </a></p>
         </div>
       </form>
-
-      <p>Form Value: {{registerForm.value | json}}}</p>
-      <p>Form Status: {{registerForm.status | json}}}</p>
-
     </div>
   </div>
 
