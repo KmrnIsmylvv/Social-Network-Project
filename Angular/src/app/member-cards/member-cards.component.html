@@ -1,19 +1,7 @@
-
-
 <div class="card mb-4">
   <div class="card-img-wrapper">
-    <img src="{{member.photoUrl}}" alt="{{member.knownAs}}" class="card-img-top">
-    <ul class="list-inline member-icons animate text-center">
-      <li class="list-inline-item">
-        <button routerLink="/explore/{{member.username}}" class="btn btnicon "><i class="fa fa-user"></i></button>
-      </li>
-      <li class="list-inline-item">
-        <button class="btn btnicon "><i class="fa fa-heart"></i></button>
-      </li>
-      <li class="list-inline-item">
-        <button class="btn btnicon"><i class="fa fa-send"></i></button>
-      </li>
-    </ul>
+    <img routerLink="/explore/{{member.username}}/" src="{{member.photoUrl}}" alt="{{member.knownAs}}"
+         class="card-img-top">
   </div>
   <div class="card-body p-1">
     <h6 class="card-title text-center mb-1"><i class="fa fa-user mr-2"></i>
@@ -22,8 +10,6 @@
     <p class="card-text text-muted text-center">{{member.city}}</p>
   </div>
 </div>
-
-
 
 
 <!--      <div class="grid lg:grid-cols-4 grid-cols-2 gap-2 hover:text-yellow-700 uk-link-reset">-->

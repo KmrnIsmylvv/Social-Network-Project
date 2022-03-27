@@ -1,4 +1,12 @@
-<body>
+<div style="height: 1px" class="col-lg-12">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="">
+  <app-sidebar></app-sidebar>
+</div>
+
+<body class="mt-5">
 <div id="wrapper">
   <div class="main_content">
     <div *ngIf="member" class="container pro-container m-auto">
@@ -26,8 +34,9 @@
 
         <div class="lg:w/8/12 flex-1 flex flex-col lg:items-start items-center">
 
-          <h2 class="font-semibold lg:text-2xl text-lg mb-2">{{member.knownAs}}         ({{member.lastActive}})</h2>
-          <p class="lg:text-left mb-2 text-center  dark:text-gray-100">{{member.introduction}}</p>
+          <h2 class="font-semibold d-inline float-left lg:text-2xl text-lg mb-2">{{member.knownAs}}</h2>
+          <h3 class="float-right"><b>Last Seen: {{member.lastActive | timeago}}</b> </h3>
+          <p class="lg:text-left mb-2 text-center mt-2  dark:text-gray-100">{{member.introduction}}</p>
 
           <div class="flex font-semibold mb-3 space-x-2  dark:text-gray-10">
             <p><i class="fa fa-location-arrow"></i><strong> Location: </strong>{{member.country}}, {{member.city}}</p>
@@ -89,7 +98,7 @@
 
           <div
             class="divide-gray-300 divide-transparent divide-x grid grid-cols-3 lg:text-left lg:text-lg mt-3 text-center w-full dark:text-gray-100">
-            <div class="flex lg:flex-row flex-col"> 120k <strong class="lg:pl-2">Posts</strong></div>
+            <div  class="flex lg:flex-row flex-col"> {{photos.length}} <strong class="lg:pl-2">Posts</strong></div>
             <div class="lg:pl-4 flex lg:flex-row flex-col"> 420k <strong class="lg:pl-2">Followers</strong></div>
             <div class="lg:pl-4 flex lg:flex-row flex-col"> 530k <strong class="lg:pl-2">Following</strong></div>
           </div>
@@ -114,8 +123,9 @@
       </div>
 
       <div class="my-6 grid lg:grid-cols-4 grid-cols-2 gap-1.5 hover:text-yellow-700 uk-link-reset">
-        <div  *ngFor="let photo of photos">
-          <div *ngIf="member"  class="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle"
+        <div *ngFor="let photo of photos">
+          <div *ngIf="member"
+               class="bg-red-500 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden uk-transition-toggle"
                tabindex="0">
             <img src="{{photo.url}}" class="w-full h-full absolute object-cover inset-0">
 

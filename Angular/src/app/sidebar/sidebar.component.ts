@@ -6,6 +6,7 @@ import {MembersService} from "../_services/members.service";
 import {AuthGuard} from "../_guards/auth.guard";
 import {Observable, take} from "rxjs";
 import {User} from "../_models/user";
+import {Photo} from "../_models/photo";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,23 +15,18 @@ import {User} from "../_models/user";
     '../../assets/css/tailwind.css', '../../assets/css/uikit.css']
 })
 export class SidebarComponent implements OnInit {
-  member: Member;
   user: User;
+  member: Member;
+  photos: Photo[];
 
-  constructor(private accountService: AccountService, private memberService: MembersService,
-              private route: ActivatedRoute, private router: Router) {
+  constructor(private accountService: AccountService, private route: ActivatedRoute,
+              private router: Router, private memberService: MembersService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
-    this.loadMember();
   }
 
-  loadMember() {
-    this.memberService.getMember(this.user.username).subscribe(member => {
-      this.member = member
-    })
-  }
 
   logout() {
     this.accountService.logout();

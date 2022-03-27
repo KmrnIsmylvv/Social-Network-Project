@@ -200,8 +200,8 @@
 
           <!-- profile -->
 
-          <a *ngIf="member" class="header-links-item">
-            <img src="{{member.photoUrl || '../../assets/user.png'}}" class="header-avatar" alt="">
+          <a *ngIf="user" class="header-links-item">
+            <img src="{{user.photoUrl || '../../assets/user.png'}}" class="header-avatar" alt="">
           </a>
           <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
             <ul>

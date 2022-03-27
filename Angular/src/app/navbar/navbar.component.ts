@@ -13,21 +13,13 @@ import {take} from "rxjs";
     '../../assets/css/icons.css', '../../assets/css/uikit.css']
 })
 export class NavbarComponent implements OnInit {
-  member: Member;
   user: User;
 
-
-  constructor(private accountService: AccountService, private memberService: MembersService,
-              private router: Router) {
+  constructor(private accountService: AccountService, private router: Router) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
-    this.loadMembers();
-  }
-
-  loadMembers() {
-    this.memberService.getMember(this.user.username).subscribe(member => this.member = member);
   }
 
   logout() {

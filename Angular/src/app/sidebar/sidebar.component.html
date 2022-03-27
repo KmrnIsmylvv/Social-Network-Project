@@ -1,4 +1,4 @@
-<body>
+<body class="">
 <div id="wrapper">
   <div class="sidebar">
     <div class="sidebar_header border-b border-gray-200 from-gray-100 to-gray-50 bg-gradient-to-t  uk-visible@s">
@@ -15,19 +15,19 @@
     </div>
     <div class="sidebar_inner" data-simplebar>
       <div class="flex flex-col items-center my-6 uk-visible@s">
-        <div *ngIf="member"
+        <div *ngIf="user"
              class="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 mr-2  w-24 h-24">
-          <img src="{{member.photoUrl || '../../assets/user.png'}}"
+          <img src="{{user.photoUrl || '../../assets/user.png'}}"
                class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
         </div>
-        <a *ngIf="member" [routerLink]="['../my-profile']"
-           class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{member.username}}
+        <a *ngIf="user" [routerLink]="['../my-profile/']"
+           class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{user.knownAs}}
         </a>
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
           <div>
             <a href="#">
               <strong>Post</strong>
-              <div> 130</div>
+              <div> 130 </div>
             </a>
           </div>
           <div>
@@ -47,7 +47,7 @@
       <hr class="-mx-4 -mt-1 uk-visible@s">
       <ul>
         <li class="active">
-          <a [routerLink]="['../feed']">
+          <a [routerLink]="['../feed/']">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -56,7 +56,7 @@
             <span> Feed </span> </a>
         </li>
         <li>
-          <a [routerLink]="['../explore']">
+          <a [routerLink]="['../explore/']">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

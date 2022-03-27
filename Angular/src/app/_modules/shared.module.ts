@@ -5,10 +5,13 @@ import {FileUploadModule} from "ng2-file-upload";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {PaginationModule} from "ngx-bootstrap/pagination";
 import {ButtonsModule} from "ngx-bootstrap/buttons";
+import {TimeagoModule} from "ngx-timeago";
+import {NavbarComponent} from "../navbar/navbar.component";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     ToastrModule.forRoot({
@@ -17,14 +20,17 @@ import {ButtonsModule} from "ngx-bootstrap/buttons";
     FileUploadModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    TimeagoModule.forRoot()
   ],
   exports: [
     ToastrModule,
     FileUploadModule,
     BsDatepickerModule,
     PaginationModule,
-    ButtonsModule
+    ButtonsModule,
+    TimeagoModule,
+    // NavbarComponent
   ]
 })
 export class SharedModule {
