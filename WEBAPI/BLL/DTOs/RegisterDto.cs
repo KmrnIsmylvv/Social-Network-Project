@@ -11,8 +11,8 @@ namespace BLL.DTOs
         [Required] public DateTime DateOfBirth { get; set; }
         [Required] public string City { get; set; }
         [Required] public string Country { get; set; }
-        
-        [Required] 
+
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
