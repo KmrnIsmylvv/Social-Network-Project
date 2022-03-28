@@ -28,6 +28,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {LoadingInterceptor} from "./_interceptor/loading.interceptor";
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { LikeListsComponent } from './like-lists/like-lists.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     MemberCardsComponent,
     SettingsPhotoComponent,
     TextInputComponent,
-    DateInputComponent
+    DateInputComponent,
+    LikeListsComponent
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,7 @@ import {ExploreComponent} from "./explore/explore.component";
 import {ExploreDetailComponent} from "./explore-detail/explore-detail.component";
 import {SettingsPhotoComponent} from "./settings-photo/settings-photo.component";
 import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
+import {LikeListsComponent} from "./like-lists/like-lists.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
       {path: 'my-profile', component: MyProfileComponent},
       {path: 'settings', component: SettingsComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'settings-photo', component: SettingsPhotoComponent},
+      {path: 'like-lists', component: LikeListsComponent},
     ]
   },
   {path: 'errors', component: TestErrorsComponent},
