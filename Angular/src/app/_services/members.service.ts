@@ -25,6 +25,14 @@ export class MembersService {
     })
   }
 
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + 'likes/' + username, {});
+  }
+
+  getLikes(predicate: string) {
+    return this.http.get(this.baseUrl + 'likes?=' + predicate);
+  }
+
   getUserParams() {
     return this.userParams;
   }
@@ -35,7 +43,7 @@ export class MembersService {
 
   resetUserParams() {
     this.userParams = new UserParams(this.user);
-    return  this.userParams;
+    return this.userParams;
   }
 
   getMembers(userParams: UserParams) {

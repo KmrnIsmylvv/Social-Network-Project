@@ -3,6 +3,7 @@ import {Member} from "../_models/member";
 import {MembersService} from "../_services/members.service";
 import {ActivatedRoute} from "@angular/router";
 import {Photo} from "../_models/photo";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-explore-detail',
@@ -14,11 +15,18 @@ export class ExploreDetailComponent implements OnInit {
   member: Member;
   photos: Photo[];
 
-  constructor(private memberService: MembersService, private route: ActivatedRoute) {
+  constructor(private memberService: MembersService, private route: ActivatedRoute,
+              private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
     this.loadMember();
+  }
+
+  addLike(member: Member) {
+    this.memberService.addLike(member.username).subscribe(() => {
+      this.toastr.success('You have liked ' + member.knownAs);
+    })
   }
 
   getPhotos() {
