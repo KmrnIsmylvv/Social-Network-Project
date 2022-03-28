@@ -31,9 +31,7 @@ const routes: Routes = [
       {path: 'messages', component: MessagesComponent},
       {path: 'my-profile', component: MyProfileComponent},
       {path: 'settings', component: SettingsComponent, canDeactivate: [PreventUnsavedChangesGuard]},
-      // {path: 'sidebar', component: SidebarComponent},
       {path: 'settings-photo', component: SettingsPhotoComponent},
-      // {path: 'navbar', component: NavbarComponent},
     ]
   },
   {path: 'errors', component: TestErrorsComponent},
