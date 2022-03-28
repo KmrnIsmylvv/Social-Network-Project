@@ -1,6 +1,6 @@
 <div class="card mb-4">
   <div class="card-img-wrapper">
-    <img routerLink="/explore/{{member.username}}/" src="{{member.photoUrl}}" alt="{{member.knownAs}}"
+    <img routerLink="/explore/{{member.username}}/" src="{{member.photoUrl || '../../assets/user.png'}} " alt="{{member.knownAs}}"
          class="card-img-top">
   </div>
   <div class="card-body p-1">
