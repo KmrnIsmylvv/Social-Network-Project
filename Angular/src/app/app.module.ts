@@ -29,6 +29,8 @@ import {LoadingInterceptor} from "./_interceptor/loading.interceptor";
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { LikeListsComponent } from './like-lists/like-lists.component';
+import { MemberMessagesComponent } from './member-messages/member-messages.component';
+import { ConversationComponent } from './conversation/conversation.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { LikeListsComponent } from './like-lists/like-lists.component';
     SettingsPhotoComponent,
     TextInputComponent,
     DateInputComponent,
-    LikeListsComponent
+    LikeListsComponent,
+    MemberMessagesComponent,
+    ConversationComponent
   ],
   imports: [
     BrowserModule,

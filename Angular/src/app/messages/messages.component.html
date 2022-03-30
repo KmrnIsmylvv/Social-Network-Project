@@ -1,1 +1,150 @@
-<p>messages works!</p>
+<div style="height: 1px" class="col-lg-12">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="">
+  <app-sidebar></app-sidebar>
+</div>
+
+<body class="mt-5">
+<div id="wrapper">
+  <div class="main_content">
+    <div class="container m-auto pt-5">
+
+      <h1 class="font-semibold lg:mb-6 mb-3 text-2xl"> Messages</h1>
+
+      <div
+        class="lg:flex lg:shadow lg:bg-white lg:space-y-0 space-y-8 rounded-md lg:-mx-0 -mx-5 overflow-hidden lg:dark:bg-gray-800">
+        <!-- left message-->
+        <div class="lg:w-4/12 bg-white border-r overflow-hidden dark:bg-gray-800 dark:border-gray-600 w-100">
+
+          <div style="height: 50px" class="row mb-4 mt-2 ml-2 mr-2">
+            <div class="btn-group" name="container">
+              <button class="btn btn-default" btnRadio="Unread" [(ngModel)]="container"
+                      (click)="loadMessages()"><i class="fa fa-envelope"></i> Unread
+              </button>
+              <button class="btn btn-default" btnRadio="Inbox" [(ngModel)]="container"
+                      (click)="loadMessages()"><i class="fa fa-inbox"></i> Inbox
+              </button>
+              <button class="btn btn-default" btnRadio="Outbox" [(ngModel)]="container"
+                      (click)="loadMessages()"><i class="fa fa-send"></i> Outbox
+              </button>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="messages?.length === 0">
+            <h3 class="ml-5">No Messages</h3>
+          </div>
+
+          <!-- user list-->
+          <div class="pb-16 w-full" *ngIf="messages?.length > 0">
+            <ul class="dark:text-gray-100">
+
+              <!-- Outbox-->
+              <li *ngIf="container === 'Outbox'">
+                <a routerLink="{{'/conversation/' + message.recipientUsername}}" *ngFor="let message of messages"
+                   class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <div class="w-12 h-12 rounded-full relative flex-shrink-0">
+                    <img src="{{message.recipientPhotoUrl || '../../assets/user.png'}}" alt=""
+                         class="absolute h-full rounded-full w-full">
+                    <span
+                      class="absolute bg-green-500 border-2 border-white bottom-0 h-3 m-0.5 right-0 rounded-full shadow-md w-3"></span>
+                  </div>
+                  <div class="flex-1 min-w-0 relative text-gray-500">
+                    <h4 class="text-black font-semibold dark:text-white">{{message.recipientUsername | titlecase}}</h4>
+                    <span class="absolute right-0 top-1 text-xs">{{message.messageSent | timeago}}</span>
+                    <p class="truncate">{{message.content}}</p>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Not Outbox-->
+              <li *ngIf="container !== 'Outbox'">
+                <a routerLink="{{'/conversation/' + message.senderUsername}}" *ngFor="let message of messages"
+                   class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <div class="w-12 h-12 rounded-full relative flex-shrink-0">
+                    <img src="{{message.senderPhotoUrl || '../../assets/user.png'}}" alt=""
+                         class="absolute h-full rounded-full w-full">
+                    <span
+                      class="absolute bg-green-500 border-2 border-white bottom-0 h-3 m-0.5 right-0 rounded-full shadow-md w-3"></span>
+                  </div>
+                  <div class="flex-1 min-w-0 relative text-gray-500">
+                    <h4 class="text-black font-semibold dark:text-white">{{message.senderUsername | titlecase}}</h4>
+                    <span class="absolute right-0 top-1 text-xs">{{message.messageSent | timeago}}</span>
+                    <p class="truncate">{{message.content}}</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <!-- Pagination-->
+            <div class="d-flex justify-content-center" *ngIf="pagination">
+              <pagination
+                [boundaryLinks]="true"
+                [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;">
+
+              </pagination>
+            </div>
+          </div>
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  (function (window, document, undefined) {
+    'use strict';
+    if (!('localStorage' in window)) return;
+    var nightMode = localStorage.getItem('gmtNightMode');
+    if (nightMode) {
+      document.documentElement.className += ' dark';
+    }
+  })(window, document);
+
+
+  (function (window, document, undefined) {
+
+    'use strict';
+
+    // Feature test
+    if (!('localStorage' in window)) return;
+
+    // Get our newly insert toggle
+    var nightMode = document.querySelector('#night-mode');
+    if (!nightMode) return;
+
+    // When clicked, toggle night mode on or off
+    nightMode.addEventListener('click', function (event) {
+      event.preventDefault();
+      document.documentElement.classList.toggle('dark');
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('gmtNightMode', true);
+        return;
+      }
+      localStorage.removeItem('gmtNightMode');
+    }, false);
+
+  })(window, document);
+</script>
+<!-- Scripts
+   ================================================== -->
+<script src="../../assets/js/tippy.all.min.js"></script>
+<script src="../../assets/js/jquery-3.3.1.min.js"></script>
+<script src="../../assets/js/uikit.js"></script>
+<script src="../../assets/js/simplebar.js"></script>
+<script src="../../assets/js/custom.js"></script>
+</body>
+
+

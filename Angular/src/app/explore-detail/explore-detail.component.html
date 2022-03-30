@@ -46,7 +46,7 @@
           <div class="capitalize flex font-semibold space-x-3 text-center text-sm my-2">
             <a href="#" class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"> Add friend</a>
             <button (click)="addLike(member)"  class="bg-gray-300 shadow-sm p-2 px-6 rounded-md dark:bg-gray-700"> Like </button>
-            <a href="#"
+            <a routerLink="{{'/conversation/'+ member.username}}"
                class="bg-pink-500 shadow-sm p-2 pink-500 px-6 rounded-md text-white hover:text-white hover:bg-pink-600">
               Send message</a>
             <div>

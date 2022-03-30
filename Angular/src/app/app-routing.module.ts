@@ -17,6 +17,8 @@ import {ExploreDetailComponent} from "./explore-detail/explore-detail.component"
 import {SettingsPhotoComponent} from "./settings-photo/settings-photo.component";
 import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
 import {LikeListsComponent} from "./like-lists/like-lists.component";
+import {ConversationComponent} from "./conversation/conversation.component";
+import {ConversationResolver} from "./_resolvers/conversation.resolver";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -28,6 +30,7 @@ const routes: Routes = [
     children: [
       {path: 'explore', component: ExploreComponent},
       {path: 'explore/:username', component: ExploreDetailComponent},
+      {path: 'conversation/:username', component: ConversationComponent, resolve: {member: ConversationResolver}},
       {path: 'feed', component: FeedComponent},
       {path: 'messages', component: MessagesComponent},
       {path: 'my-profile', component: MyProfileComponent},
