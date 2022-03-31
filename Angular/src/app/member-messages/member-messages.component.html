@@ -17,9 +17,8 @@
         class="lg:flex lg:shadow lg:bg-white lg:space-y-0 space-y-8 rounded-md lg:-mx-0 -mx-5 overflow-hidden lg:dark:bg-gray-800">
 
 
-
         <!--  message-->
-        <div  class="lg:w-8/12 bg-white dark:bg-gray-800 w-100 ">
+        <div class="lg:w-8/12 bg-white dark:bg-gray-800 w-100 ">
 
           <div class="border-t dark:border-gray-600">
 
@@ -57,13 +56,20 @@
               </div>
             </div>
 
-            <form>
+            <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
               <div class="border-t flex p-6 dark:border-gray-700">
-              <textarea cols="1" rows="1" placeholder="Your Message.."
-                        class="border-0 flex-1 h-10 min-h-0 resize-none min-w-0 shadow-none dark:bg-transparent"></textarea>
+                <input
+                  name="messageContent"
+                  required
+                  [(ngModel)]="messageContent"
+                  type="text"
+                  placeholder="Your Message.."
+                  class="border-0 flex-1 h-10 min-h-0 resize-none min-w-0 shadow-none dark:bg-transparent">
                 <div class="flex h-full space-x-2">
 
-                  <button type="submit" class="bg-blue-600 font-semibold px-6 py-2 rounded-md text-white">Send</button>
+                  <button [disabled]="!messageForm.valid" type="submit"
+                          class="bg-blue-600 font-semibold px-6 py-2 rounded-md text-white">Send
+                  </button>
                 </div>
               </div>
             </form>
