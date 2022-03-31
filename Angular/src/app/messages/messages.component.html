@@ -42,7 +42,8 @@
 
               <!-- Outbox-->
               <li *ngIf="container === 'Outbox'">
-                <a [hidden]="loading" routerLink="{{'/conversation/' + message.recipientUsername}}" *ngFor="let message of messages"
+                <a [hidden]="loading" routerLink="{{'/conversation/' + message.recipientUsername}}"
+                   *ngFor="let message of messages"
                    class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                   <div class="w-12 h-12 rounded-full relative flex-shrink-0">
                     <img src="{{message.recipientPhotoUrl || '../../assets/user.png'}}" alt=""
@@ -55,13 +56,15 @@
                     <span class="absolute right-0 top-1 text-xs">{{message.messageSent | timeago}}</span>
                     <p class="truncate">{{message.content}}</p>
                   </div>
-                  <i class="uil-trash-alt text-red-500 "></i>
+                  <i (click)="$event.stopPropagation(); deleteMessage(message.id)"
+                     class="uil-trash-alt text-red-500 "></i>
                 </a>
               </li>
 
               <!-- Not Outbox-->
               <li *ngIf="container !== 'Outbox'">
-                <a [hidden]="loading" routerLink="{{'/conversation/' + message.senderUsername}}" *ngFor="let message of messages"
+                <a [hidden]="loading" routerLink="{{'/conversation/' + message.senderUsername}}"
+                   *ngFor="let message of messages"
                    class="block flex items-center py-3 px-4 space-x-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                   <div class="w-12 h-12 rounded-full relative flex-shrink-0">
                     <img src="{{message.senderPhotoUrl || '../../assets/user.png'}}" alt=""
@@ -74,7 +77,8 @@
                     <span class="absolute right-0 top-1 text-xs">{{message.messageSent | timeago}}</span>
                     <p class="truncate">{{message.content}}</p>
                   </div>
-                  <i class="uil-trash-alt text-red-500 "></i>
+                  <i (click)="$event.stopPropagation(); deleteMessage(message.id)"
+                     class="uil-trash-alt text-red-500 "></i>
                 </a>
 
               </li>
@@ -97,7 +101,6 @@
           </div>
 
         </div>
-
 
 
       </div>

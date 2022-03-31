@@ -36,7 +36,10 @@ namespace BLL.Services.Repositories
 
         public async Task<Message> GetMessage(int id)
         {
-            return await _context.Messages.FindAsync(id);
+            return await _context.Messages
+                .Include(m => m.Sender)
+                .Include(m => m.Recipient)
+                .SingleOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
@@ -65,11 +68,11 @@ namespace BLL.Services.Repositories
             var messages = await _context.Messages
                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
-                .Where(m => 
-                            m.Recipient.UserName == currentUsername && m.RecipientDeleted == false
-                            && m.Sender.UserName == recipientUsername
-                            || m.Recipient.UserName == recipientUsername
-                            && m.Sender.UserName == currentUsername && m.SenderDeleted == false
+                .Where(m =>
+                    m.Recipient.UserName == currentUsername && m.RecipientDeleted == false
+                                                            && m.Sender.UserName == recipientUsername
+                    || m.Recipient.UserName == recipientUsername
+                    && m.Sender.UserName == currentUsername && m.SenderDeleted == false
                 )
                 .OrderBy(m => m.MessageSent)
                 .ToListAsync();
