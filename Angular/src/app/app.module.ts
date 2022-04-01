@@ -32,6 +32,7 @@ import { LikeListsComponent } from './like-lists/like-lists.component';
 import { MemberMessagesComponent } from './member-messages/member-messages.component';
 import { ConversationComponent } from './conversation/conversation.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
     LikeListsComponent,
     MemberMessagesComponent,
     ConversationComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,
