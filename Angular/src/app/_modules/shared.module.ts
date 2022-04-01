@@ -30,7 +30,6 @@ import {NavbarComponent} from "../navbar/navbar.component";
     PaginationModule,
     ButtonsModule,
     TimeagoModule,
-    // NavbarComponent
   ]
 })
 export class SharedModule {
