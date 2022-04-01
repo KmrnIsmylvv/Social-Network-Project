@@ -31,6 +31,7 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { LikeListsComponent } from './like-lists/like-lists.component';
 import { MemberMessagesComponent } from './member-messages/member-messages.component';
 import { ConversationComponent } from './conversation/conversation.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ConversationComponent } from './conversation/conversation.component';
     DateInputComponent,
     LikeListsComponent,
     MemberMessagesComponent,
-    ConversationComponent
+    ConversationComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
