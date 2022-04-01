@@ -1,9 +1,10 @@
-﻿using EntityLayer.Entities;
+﻿using System.Threading.Tasks;
+using EntityLayer.Entities;
 
 namespace BLL.Interfaces
 {
     public interface ITokenService
     {
-        string CreateToken(AppUser user);
+        Task<string> CreateToken(AppUser user);
     }
 }
