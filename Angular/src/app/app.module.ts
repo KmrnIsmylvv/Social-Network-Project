@@ -33,6 +33,9 @@ import { MemberMessagesComponent } from './member-messages/member-messages.compo
 import { ConversationComponent } from './conversation/conversation.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import {TabsModule} from "ngx-bootstrap/tabs";
 
 
 @NgModule({
@@ -59,18 +62,21 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     MemberMessagesComponent,
     ConversationComponent,
     AdminPanelComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    UserManagementComponent,
+    PhotoManagementComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    NgxSpinnerModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        NgxSpinnerModule,
+        TabsModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

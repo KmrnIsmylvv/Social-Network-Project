@@ -1,1 +1,35 @@
-<p>admin-panel works!</p>
+<div style="height: 1px" class="col-lg-12">
+  <app-navbar></app-navbar>
+</div>
+
+<div class="">
+  <app-sidebar></app-sidebar>
+</div>
+
+<body class="mt-5">
+<div id="wrapper">
+  <div class="main_content">
+    <div class="container m-auto">
+
+      <h1 class="lg:lg:text-2xl text-lg text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-3">
+        Admin Panel </h1>
+
+      <div  class="tab-panel mt-5">
+        <tabset class="member-tabset">
+          <tab heading='User Management' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+              <app-user-management></app-user-management>
+            </div>
+          </tab>
+          <tab heading='Photo Management' *appHasRole='["Admin", "Moderator"]'>
+            <div class="container">
+              <app-photo-management></app-photo-management>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>

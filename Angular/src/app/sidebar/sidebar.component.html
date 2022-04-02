@@ -21,7 +21,7 @@
                class="bg-gray-200 border-4 border-white rounded-full w-full h-full">
         </div>
         <a *ngIf="user" [routerLink]="['../my-profile/']"
-           class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{user.knownAs}}
+           class="text-xl font-medium capitalize mt-4 uk-link-reset"> {{user.knownAs || user.username}}
         </a>
         <div class="flex justify-around w-full items-center text-center uk-link-reset text-gray-800 mt-6">
           <div>
