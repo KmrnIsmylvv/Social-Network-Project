@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using BLL.Helpers.Extensions;
 using BLL.Middleware;
+using BLL.SignalR;
 
 namespace API
 {
@@ -41,6 +42,7 @@ namespace API
             services.AddCors();
 
             services.AddIdentityServices(_config);
+            services.AddSignalR();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
         }
@@ -67,7 +69,11 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+            });
         }
     }
-}
+}    
