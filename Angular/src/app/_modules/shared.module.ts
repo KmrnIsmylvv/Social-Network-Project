@@ -7,11 +7,11 @@ import {PaginationModule} from "ngx-bootstrap/pagination";
 import {ButtonsModule} from "ngx-bootstrap/buttons";
 import {TimeagoModule} from "ngx-timeago";
 import {NavbarComponent} from "../navbar/navbar.component";
+import {ModalModule} from "ngx-bootstrap/modal";
 
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     ToastrModule.forRoot({
@@ -21,7 +21,8 @@ import {NavbarComponent} from "../navbar/navbar.component";
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     ToastrModule,
@@ -30,6 +31,7 @@ import {NavbarComponent} from "../navbar/navbar.component";
     PaginationModule,
     ButtonsModule,
     TimeagoModule,
+    ModalModule
   ]
 })
 export class SharedModule {
