@@ -453,7 +453,10 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-appsettings.json
+./API/appsettings.json
+../.vs
+../.vscode
+./API/socialnetwork.db
 
 
 
