@@ -31,7 +31,6 @@
         <div class="right-side lg:pr-4">
 
 
-
           <!-- Notification -->
 
           <a href="#" class="header-links-item">
@@ -116,7 +115,7 @@
 
           <!-- Messages -->
 
-          <a href="#" class="header-links-item">
+          <a (click)="loadMessages()"  class="header-links-item">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -127,75 +126,20 @@
             <h4
               class="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
               Messages </h4>
-            <ul class="dropdown_scrollbar" data-simplebar>
-              <li>
-                <a href="#">
-                  <div class="drop_avatar"><img src="../../assets/images/avatars/avatar-1.jpg" alt="">
+            <ul  class="dropdown_scrollbar" data-simplebar>
+              <li *ngFor="let message of messages">
+                <a routerLink="{{'/conversation/' + message.senderUsername}}">
+                  <div class="drop_avatar"><img src="{{message.senderPhotoUrl || '../../assets/user.png'}}" alt="">
                   </div>
                   <div class="drop_content">
-                    <strong> John menathon </strong>
-                    <time> 6:43 PM</time>
-                    <p> Lorem ipsum dolor sit amet, consectetur </p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="drop_avatar"><img src="../../assets/images/avatars/avatar-2.jpg" alt="">
-                  </div>
-                  <div class="drop_content">
-                    <strong> Zara Ali </strong>
-                    <time>12:43 PM</time>
-                    <p> Sediam nonummy nibh euismod tincidunt laoreet dolore </p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="drop_avatar"><img src="../../assets/images/avatars/avatar-3.jpg" alt="">
-                  </div>
-                  <div class="drop_content">
-                    <strong> Mohamed Ali </strong>
-                    <time> Wed</time>
-                    <p> Lorem ipsum dolor sit amet, consectetur </p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="drop_avatar"><img src="../../assets/images/avatars/avatar-1.jpg" alt="">
-                  </div>
-                  <div class="drop_content">
-                    <strong> John menathon </strong>
-                    <time> Sun</time>
-                    <p> Namliber tempor cumsoluta nobis eleifend option adipiscing </p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="drop_avatar"><img src="../../assets/images/avatars/avatar-2.jpg" alt="">
-                  </div>
-                  <div class="drop_content">
-                    <strong> Zara Ali </strong>
-                    <time> Fri</time>
-                    <p> Lorem ipsum dolor sit amet, consectetur </p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="drop_avatar"><img src="../../assets/images/avatars/avatar-3.jpg" alt="">
-                  </div>
-                  <div class="drop_content">
-                    <strong> Mohamed Ali </strong>
-                    <time>1 Week ago</time>
-                    <p> Sediam nonummy nibh euismod tincidunt laoreet dolore </p>
+                    <strong> {{message.senderUsername | titlecase}} </strong>
+                    <time> {{message.messageSent | timeago}}</time>
+                    <p> {{message.content}}</p>
                   </div>
                 </a>
               </li>
             </ul>
-            <a href="#" class="see-all">See all</a>
+            <a routerLink="/messages" class="see-all">See all</a>
           </div>
 
           <!-- profile -->

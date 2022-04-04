@@ -25,7 +25,7 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadMessages();
+
   }
 
   loadMessages() {

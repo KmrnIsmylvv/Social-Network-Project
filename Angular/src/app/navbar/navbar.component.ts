@@ -5,6 +5,9 @@ import {MembersService} from "../_services/members.service";
 import {Member} from "../_models/member";
 import {User} from "../_models/user";
 import {take} from "rxjs";
+import {Message} from "../_models/message";
+import {Pagination} from "../_models/pagination";
+import {MessageService} from "../_services/message.service";
 
 @Component({
   selector: 'app-navbar',
@@ -14,12 +17,28 @@ import {take} from "rxjs";
 })
 export class NavbarComponent implements OnInit {
   user: User;
+  messages: Message[] = [];
+  pagination: Pagination;
+  container = 'Unread';
+  pageNumber = 1;
+  pageSize = 5;
+  loading = false;
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(private accountService: AccountService, private router: Router,
+              private messageService: MessageService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
+  }
+
+  loadMessages() {
+    this.loading = true;
+    this.messageService.getMessages(this.pageNumber, this.pageSize, this.container).subscribe(response => {
+      this.messages = response.result;
+      this.pagination = response.pagination;
+      this.loading = false;
+    })
   }
 
   logout() {
