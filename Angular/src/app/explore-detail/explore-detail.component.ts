@@ -4,6 +4,7 @@ import {MembersService} from "../_services/members.service";
 import {ActivatedRoute} from "@angular/router";
 import {Photo} from "../_models/photo";
 import {ToastrService} from "ngx-toastr";
+import {PresenceService} from "../_services/presence.service";
 
 @Component({
   selector: 'app-explore-detail',
@@ -16,7 +17,7 @@ export class ExploreDetailComponent implements OnInit {
   photos: Photo[];
 
   constructor(private memberService: MembersService, private route: ActivatedRoute,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, public presence: PresenceService) {
   }
 
   ngOnInit(): void {
