@@ -1,9 +1,13 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Message} from '../_models/message';
 import {MessageService} from "../_services/message.service";
 import {MembersService} from "../_services/members.service";
 import {ActivatedRoute} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {AccountService} from "../_services/account.service";
+import {User} from "../_models/user";
+import {take} from "rxjs";
+import {Member} from "../_models/member";
 
 @Component({
   selector: 'app-member-messages',
@@ -14,11 +18,11 @@ import {NgForm} from "@angular/forms";
 export class MemberMessagesComponent implements OnInit {
   @ViewChild('messageForm') messageForm: NgForm;
   @Input() username: string;
-  messages: Message[];
+  messages: Message[] = [];
   messageContent: string;
+  user: User
 
-
-  constructor(private messageService: MessageService, private memberService: MembersService) {
+  constructor(public messageService: MessageService, private memberService: MembersService,) {
   }
 
   ngOnInit(): void {

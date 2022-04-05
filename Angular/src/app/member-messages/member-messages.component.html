@@ -22,37 +22,39 @@
 
           <div class="border-t dark:border-gray-600">
 
-            <div class="w-100" *ngIf="messages?.length === 0">
+            <div class="w-100" *ngIf="(messageService.messageThread$ | async)?.length === 0">
               No messages...
             </div>
 
-            <div *ngFor="let message of messages" class="lg:p-8 p-4 space-y-5">
+            <div *ngIf="(messageService.messageThread$ | async).length > 0">
+              <div *ngFor="let message of (messageService.messageThread$ | async)" class="lg:p-8 p-4 space-y-5">
 
-              <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2">
-                <span>{{message.messageSent | timeago}} </span>
-              </h3>
+                <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2">
+                  <span>{{message.messageSent | timeago}} </span>
+                </h3>
 
-              <!-- my message-->
-              <div class="flex lg:items-center flex-row-reverse">
-                <div class="w-14 h-14 rounded-full relative flex-shrink-0">
-                  <img src="{{message.senderPhotoUrl}}" alt="{{message.senderUsername}}"
-                       class="absolute h-full rounded-full w-full">
-                </div>
+                <!-- my message-->
+                <div class="flex lg:items-center flex-row-reverse">
+                  <div class="w-14 h-14 rounded-full relative flex-shrink-0">
+                    <img src="{{message.senderPhotoUrl}}" alt="{{message.senderUsername}}"
+                         class="absolute h-full rounded-full w-full">
+                  </div>
 
-                <div class="text-white py-2 px-3 rounded bg-blue-600 relative h-full lg:mr-5 mr-2 lg:ml-20">
-                  <p class="leading-6">{{message.content}}
-                  </p>
-                  <div class="absolute w-3 h-3 top-3 -right-1 bg-blue-600 transform rotate-45"></div>
-                </div>
+                  <div class="text-white py-2 px-3 rounded bg-blue-600 relative h-full lg:mr-5 mr-2 lg:ml-20">
+                    <p class="leading-6">{{message.content}}
+                    </p>
+                    <div class="absolute w-3 h-3 top-3 -right-1 bg-blue-600 transform rotate-45"></div>
+                  </div>
 
-                <small class="text-muted">
+                  <small class="text-muted">
                   <span class="text-danger"
                         *ngIf="!message.dateRead && message.senderUsername !== username">(unread)</span>
-                  <span class="text-success"
-                        *ngIf="message.dateRead && message.senderUsername !==username">(read {{message.dateRead | timeago}}
-                    )</span>
-                </small>
+                    <span class="text-success"
+                          *ngIf="message.dateRead && message.senderUsername !==username">(read {{message.dateRead | timeago}}
+                      )</span>
+                  </small>
 
+                </div>
               </div>
             </div>
 
