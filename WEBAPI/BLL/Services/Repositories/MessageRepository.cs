@@ -24,6 +24,28 @@ namespace BLL.Services.Repositories
             _mapper = mapper;
         }
 
+        public void AddGroup(Group group)
+        {
+            _context.Groups.Add(group);
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            _context.Connections.Remove(connection);
+        }
+
+        public async Task<Connection> GetConnection(string connectionId)
+        {
+            return await _context.Connections.FindAsync(connectionId);
+        }
+
+        public async Task<Group> GetMessageGroup(string groupName)
+        {
+            return await _context.Groups
+                .Include(x => x.Connections)
+                .FirstOrDefaultAsync(x => x.Name == groupName);
+        }
+
         public void AddMessage(Message message)
         {
             _context.Messages.Add(message);
