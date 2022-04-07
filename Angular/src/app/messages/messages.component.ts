@@ -5,6 +5,7 @@ import {MessageService} from "../_services/message.service";
 import {Member} from "../_models/member";
 import {MembersService} from "../_services/members.service";
 import {ActivatedRoute} from "@angular/router";
+import {ConfirmService} from "../_services/confirm.service";
 
 @Component({
   selector: 'app-messages',
@@ -21,7 +22,7 @@ export class MessagesComponent implements OnInit {
   loading = false;
 
   constructor(private messageService: MessageService, private memberService: MembersService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private confirmService: ConfirmService) {
   }
 
   ngOnInit(): void {
@@ -47,5 +48,4 @@ export class MessagesComponent implements OnInit {
     this.pageNumber = event.page;
     this.loadMessages();
   }
-
 }
