@@ -115,7 +115,7 @@
 
           <!-- Messages -->
 
-          <a (click)="loadMessages()"  class="header-links-item">
+          <a (click)="loadMessages()" class="header-links-item">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -126,7 +126,7 @@
             <h4
               class="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
               Messages </h4>
-            <ul  class="dropdown_scrollbar" data-simplebar>
+            <ul class="dropdown_scrollbar" data-simplebar>
               <li *ngFor="let message of messages">
                 <a routerLink="{{'/conversation/' + message.senderUsername}}">
                   <div class="drop_avatar"><img src="{{message.senderPhotoUrl || '../../assets/user.png'}}" alt="">
@@ -148,6 +148,9 @@
             <img src="{{user.photoUrl || '../../assets/user.png'}}" class="header-avatar" alt="">
           </a>
           <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+            <ul>
+              <li><a [routerLink]="['../like-lists']"> Statistics </a></li>
+            </ul>
             <ul>
               <li><a [routerLink]="['../settings']"> Account setting </a></li>
               <li><a (click)="logout()"> Log Out</a></li>
