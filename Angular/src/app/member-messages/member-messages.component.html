@@ -26,7 +26,10 @@
               No messages...
             </div>
 
-            <div *ngIf="(messageService.messageThread$ | async).length > 0">
+            <div #scrollMe
+                 style="overflow: scroll; height: 500px;"
+                 [scrollTop]="scrollMe.scrollHeight"
+              *ngIf="(messageService.messageThread$ | async).length > 0">
               <div *ngFor="let message of (messageService.messageThread$ | async)" class="lg:p-8 p-4 space-y-5">
 
                 <h3 class="lg:w-60 mx-auto text-sm uk-heading-line uk-text-center lg:pt-2">
