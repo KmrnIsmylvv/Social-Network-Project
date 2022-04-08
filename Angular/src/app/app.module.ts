@@ -38,6 +38,8 @@ import { PhotoManagementComponent } from './admin/photo-management/photo-managem
 import {TabsModule} from "ngx-bootstrap/tabs";
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { FeedCardComponent } from './feed-card/feed-card.component';
+import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    FeedCardComponent,
+    WhoToFollowComponent
   ],
     imports: [
         BrowserModule,

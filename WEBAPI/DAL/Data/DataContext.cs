@@ -25,6 +25,8 @@ namespace DAL.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             if (!options.IsConfigured)
@@ -73,25 +75,33 @@ namespace DAL.Data
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
+            builder.Entity<Comment>()
+                .HasOne(p => p.Photo)
+                .WithMany(c => c.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.ApplyUtcDateTimeConverter();
         }
     }
-    
+
     public static class UtcDateAnnotation
     {
         private const String IsUtcAnnotation = "IsUtc";
+
         private static readonly ValueConverter<DateTime, DateTime> UtcConverter =
             new ValueConverter<DateTime, DateTime>(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
         private static readonly ValueConverter<DateTime?, DateTime?> UtcNullableConverter =
-            new ValueConverter<DateTime?, DateTime?>(v => v, v => v == null ? v : DateTime.SpecifyKind(v.Value, DateTimeKind.Utc));
+            new ValueConverter<DateTime?, DateTime?>(v => v,
+                v => v == null ? v : DateTime.SpecifyKind(v.Value, DateTimeKind.Utc));
 
-        public static PropertyBuilder<TProperty> IsUtc<TProperty>(this PropertyBuilder<TProperty> builder, Boolean isUtc = true) =>
+        public static PropertyBuilder<TProperty> IsUtc<TProperty>(this PropertyBuilder<TProperty> builder,
+            Boolean isUtc = true) =>
             builder.HasAnnotation(IsUtcAnnotation, isUtc);
 
         public static Boolean IsUtc(this IMutableProperty property) =>
-            ((Boolean?)property.FindAnnotation(IsUtcAnnotation)?.Value) ?? true;
+            ((Boolean?) property.FindAnnotation(IsUtcAnnotation)?.Value) ?? true;
 
         /// <summary>
         /// Make sure this is called after configuring all your entities.

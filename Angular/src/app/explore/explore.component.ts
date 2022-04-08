@@ -19,7 +19,7 @@ export class ExploreComponent implements OnInit {
   userParams: UserParams;
   user: User;
 
-  constructor(private memberService: MembersService, private accountService: AccountService) {
+  constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
   }
 

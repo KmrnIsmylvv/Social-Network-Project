@@ -3,6 +3,7 @@ import {MembersService} from "../_services/members.service";
 import {Member} from "../_models/member";
 import {Pagination} from "../_models/pagination";
 import {UserParams} from "../_models/userParams";
+import {Photo} from "../_models/photo";
 
 @Component({
   selector: 'app-feed',
@@ -12,8 +13,8 @@ import {UserParams} from "../_models/userParams";
 })
 export class FeedComponent implements OnInit {
   members: Member[];
-  pagination: Pagination;
   userParams: UserParams;
+  photo: Photo;
 
 
   constructor(private memberService: MembersService) {
@@ -24,12 +25,19 @@ export class FeedComponent implements OnInit {
     this.loadMembers();
   }
 
+  getPhotoForMember() {
+    let photo: Photo;
+    for (const member of this.members) {
+      photo = member.photos[member.photos.length - 1];
+    }
+    return photo;
+  }
+
   loadMembers() {
     this.memberService.setUserParams(this.userParams);
     this.memberService.getMembers(this.userParams).subscribe(response => {
       this.members = response.result;
-      this.pagination = response.pagination;
+      this.photo = this.getPhotoForMember();
     })
   }
-
 }
