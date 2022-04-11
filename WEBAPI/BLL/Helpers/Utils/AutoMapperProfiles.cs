@@ -23,6 +23,14 @@ namespace BLL.Helpers.Utils
                 .ForMember(dest => dest.RecipientPhotoUrl, opt =>
                     opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
 
+            CreateMap<Comment, CommentDto>()
+                .ForMember(k => k.KnownAs, o =>
+                    o.MapFrom(src => src.Author.KnownAs))
+                .ForMember(u => u.Username, a =>
+                    a.MapFrom(src => src.Author.UserName))
+                .ForMember(p => p.PhotoUrl, o =>
+                    o.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url));
+            
             CreateMap<Photo, PhotoDto>();
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();

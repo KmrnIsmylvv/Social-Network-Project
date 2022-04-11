@@ -19,5 +19,8 @@ namespace BLL.DTOs
         [Required]
         [StringLength(8, MinimumLength = 4)]
         public string Password { get; set; }
+        
+        public string ConfirmPassword { get; set; }
+        public string ClientURI { get; set; }
     }
 }

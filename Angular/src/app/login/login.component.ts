@@ -21,18 +21,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe(response => {
-      console.log(response);
       this.router.navigateByUrl('/feed');
     }, error => {
-      this.toastr.error('Invalid username or password');
+      this.toastr.error(error.error);
     })
   }
-
-  // getCurrentUser() {
-  //   this.accountService.currentUser$.subscribe(user => {
-  //     this.loggedIn = !!user;
-  //   }, error => {
-  //     console.log(error);
-  //   })
-  // }
 }

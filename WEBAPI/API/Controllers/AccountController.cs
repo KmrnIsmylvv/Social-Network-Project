@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.ObjectPool;
@@ -45,6 +48,19 @@ namespace API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
+            
+            // Email confirmation
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var param = new Dictionary<string, string>
+            {
+                {"token", token},
+                {"email", user.Email}
+            };
+            var callBack = QueryHelpers.AddQueryString(registerDto.ClientURI, param);
+            
+            
+            // var message = new MailMessage(new string[] {user.Email},"Email Confirmation token", callBack,null)
+            
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
@@ -67,6 +83,9 @@ namespace API.Controllers
                 .SingleOrDefaultAsync(u => u.UserName == loginDto.Username);
 
             if (user == null) return Unauthorized("Invalid Username or Password");
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+                return Unauthorized("Email is not confirmed");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
