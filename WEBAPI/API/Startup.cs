@@ -1,26 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BLL.Interfaces;
 using BLL.Services;
-using DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using BLL.Helpers.Extensions;
 using BLL.Middleware;
 using BLL.SignalR;
+using EntityLayer.Entities;
 
 namespace API
 {
@@ -48,6 +37,9 @@ namespace API
                     .AllowCredentials());
             });
 
+            
+
+            
             services.AddSignalR();
             services.AddIdentityServices(_config);
 

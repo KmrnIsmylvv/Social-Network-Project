@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {map, ReplaySubject} from "rxjs";
 import {readSpanComment} from "@angular/compiler-cli/src/ngtsc/typecheck/src/comments";
 import {User} from "../_models/user";
 import {environment} from "../../environments/environment";
 import {PresenceService} from "./presence.service";
+import {CustomEncoder} from "../_models/custom-encoder";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,14 @@ export class AccountService {
         }
       })
     )
+  }
+
+  public confirmEmail = (route:string, token: string, email: string) => {
+    let params = new HttpParams({encoder: new CustomEncoder()})
+    params = params.append('token', token);
+    params = params.append('email', email);
+
+    return this.http.get(this.baseUrl + 'account/EmailConfirmation', {params: params});
   }
 
   setCurrentUser(user: User) {

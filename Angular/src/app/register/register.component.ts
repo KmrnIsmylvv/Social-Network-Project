@@ -37,7 +37,8 @@ export class RegisterComponent implements OnInit {
       country: ['', Validators.required],
       password: ['', [Validators.required,
         Validators.minLength(4), Validators.maxLength(8)]],
-      confirmPassword: ['', [Validators.required, this.matchValues('password')]]
+      confirmPassword: ['', [Validators.required, this.matchValues('password')]],
+      clientURI: 'https://localhost:4200/email-confirmation'
     })
   }
 
@@ -48,10 +49,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
   register() {
     this.accountService.register(this.registerForm.value).subscribe(response => {
-      this.router.navigateByUrl('/feed');
+      this.router.navigateByUrl('/login');
+      this.toastr.info("Check your email");
     }, error => {
       this.validationErrors = error;
     })

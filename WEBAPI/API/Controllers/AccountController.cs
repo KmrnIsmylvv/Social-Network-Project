@@ -26,14 +26,16 @@ namespace API.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IEmailSender _emailSender;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IMapper mapper)
+            ITokenService tokenService, IMapper mapper, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _mapper = mapper;
+            _emailSender = emailSender;
         }
 
         [HttpPost("register")]
@@ -48,7 +50,7 @@ namespace API.Controllers
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
-            
+
             // Email confirmation
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var param = new Dictionary<string, string>
@@ -57,11 +59,12 @@ namespace API.Controllers
                 {"email", user.Email}
             };
             var callBack = QueryHelpers.AddQueryString(registerDto.ClientURI, param);
-            
-            
-            // var message = new MailMessage(new string[] {user.Email},"Email Confirmation token", callBack,null)
-            
 
+            var message = new EmailMessage(new string[] {user.Email}, "Email Confirmation token",
+                callBack, null);
+            await _emailSender.SendEmailAsync(message);
+
+            // Roles
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);
@@ -104,6 +107,20 @@ namespace API.Controllers
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
+        }
+
+        [HttpGet("EmailConfirmation")]
+        public async Task<IActionResult> EmailConfirmation([FromQuery] string email, [FromQuery] string token)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null) return BadRequest("Invalid Email Confirmation Request");
+
+            var confirmResult = await _userManager.ConfirmEmailAsync(user, token);
+
+            if (!confirmResult.Succeeded) return BadRequest("Invalid Email Confirmation Request");
+
+            return Ok();
         }
     }
 }

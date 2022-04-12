@@ -40,6 +40,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { FeedCardComponent } from './feed-card/feed-card.component';
 import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
+import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
     RolesModalComponent,
     ConfirmDialogComponent,
     FeedCardComponent,
-    WhoToFollowComponent
+    WhoToFollowComponent,
+    EmailConfirmationComponent
   ],
     imports: [
         BrowserModule,

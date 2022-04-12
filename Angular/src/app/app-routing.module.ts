@@ -6,9 +6,7 @@ import {FeedComponent} from "./feed/feed.component";
 import {MessagesComponent} from "./messages/messages.component";
 import {MyProfileComponent} from "./my-profile/my-profile.component";
 import {SettingsComponent} from "./settings/settings.component";
-import {SidebarComponent} from "./sidebar/sidebar.component";
 import {AuthGuard} from "./_guards/auth.guard";
-import {NavbarComponent} from "./navbar/navbar.component";
 import {TestErrorsComponent} from "./errors/test-errors/test-errors.component";
 import {NotFoundComponent} from "./errors/not-found/not-found.component";
 import {ServerErrorComponent} from "./errors/server-error/server-error.component";
@@ -21,6 +19,7 @@ import {ConversationComponent} from "./conversation/conversation.component";
 import {ConversationResolver} from "./_resolvers/conversation.resolver";
 import {AdminPanelComponent} from "./admin/admin-panel/admin-panel.component";
 import {AdminGuard} from "./_guards/admin.guard";
+import {EmailConfirmationComponent} from "./email-confirmation/email-confirmation.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -39,6 +38,7 @@ const routes: Routes = [
       {path: 'settings', component: SettingsComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'settings-photo', component: SettingsPhotoComponent},
       {path: 'like-lists', component: LikeListsComponent},
+      {path: 'email-confirmation', component: EmailConfirmationComponent},
       {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]}
     ]
   },
