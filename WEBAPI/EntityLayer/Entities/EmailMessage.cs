@@ -18,7 +18,7 @@ namespace EntityLayer.Entities
         {
             To = new List<MailboxAddress>();
 
-            To.AddRange(to.Select(x => new MailboxAddress("name", x)));
+            To.AddRange(to.Select(x => new MailboxAddress("Instello", x)));
             Subject = subject;
             Content = content;
             Attachments = attachments;

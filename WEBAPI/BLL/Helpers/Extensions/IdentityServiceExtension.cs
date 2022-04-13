@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using DAL.Data;
 using EntityLayer.Entities;
@@ -23,7 +24,9 @@ namespace BLL.Helpers.Extensions
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
-
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                opt.TokenLifespan = TimeSpan.FromHours(2));
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

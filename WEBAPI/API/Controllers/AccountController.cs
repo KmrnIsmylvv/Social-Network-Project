@@ -122,5 +122,31 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
+
+            if (user == null) return BadRequest("Invalid Request");
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var param = new Dictionary<string, string>
+            {
+                {"token", token},
+                {"email", forgotPasswordDto.Email}
+            };
+
+            var callback = QueryHelpers.AddQueryString(forgotPasswordDto.ClientUri, param);
+
+            var message = new EmailMessage(new string[] {user.Email}, "Reset password token", callback, null);
+
+            await _emailSender.SendEmailAsync(message);
+
+            return Ok();
+        }
     }
 }

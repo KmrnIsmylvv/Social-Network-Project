@@ -35,7 +35,7 @@ namespace BLL.Services
         private MimeMessage CreateEmailMessage(EmailMessage message)
         {
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("Instello", _emailConfig.From));
+            emailMessage.From.Add(new MailboxAddress("Inc.", _emailConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
