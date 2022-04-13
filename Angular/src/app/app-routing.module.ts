@@ -20,6 +20,7 @@ import {ConversationResolver} from "./_resolvers/conversation.resolver";
 import {AdminPanelComponent} from "./admin/admin-panel/admin-panel.component";
 import {AdminGuard} from "./_guards/admin.guard";
 import {EmailConfirmationComponent} from "./email-confirmation/email-confirmation.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path: 'errors', component: TestErrorsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: '**', component: FeedComponent, pathMatch: 'full'},
 ];
 

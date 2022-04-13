@@ -14,7 +14,8 @@
 
         <div class="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
           <a [routerLink]="['../login']" class="py-3 px-4">Login</a>
-          <a [routerLink]="['../register']" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Register</a>
+          <a [routerLink]="['../register']"
+             class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Register</a>
         </div>
 
       </div>
@@ -46,7 +47,7 @@
             <input type="checkbox" id="chekcbox1" checked>
             <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
           </div>
-          <a href="#"> Forgot Your Password? </a>
+          <a [routerLink]="['../forgot-password']"> Forgot Your Password? </a>
         </div>
         <button type="submit"
                 class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Login

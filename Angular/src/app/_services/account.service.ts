@@ -6,6 +6,7 @@ import {User} from "../_models/user";
 import {environment} from "../../environments/environment";
 import {PresenceService} from "./presence.service";
 import {CustomEncoder} from "../_models/custom-encoder";
+import {ForgotPassword} from "../_models/forgot-password";
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,16 @@ export class AccountService {
     )
   }
 
-  public confirmEmail = (route:string, token: string, email: string) => {
+  public confirmEmail = (route: string, token: string, email: string) => {
     let params = new HttpParams({encoder: new CustomEncoder()})
     params = params.append('token', token);
     params = params.append('email', email);
 
     return this.http.get(this.baseUrl + 'account/EmailConfirmation', {params: params});
+  }
+
+  public forgotPassword = (route: string, body: ForgotPassword) => {
+    return this.http.post(this.baseUrl + 'account/ForgotPassword', body);
   }
 
   setCurrentUser(user: User) {

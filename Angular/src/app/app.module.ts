@@ -41,6 +41,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { FeedCardComponent } from './feed-card/feed-card.component';
 import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { EmailConfirmationComponent } from './email-confirmation/email-confirmat
     ConfirmDialogComponent,
     FeedCardComponent,
     WhoToFollowComponent,
-    EmailConfirmationComponent
+    EmailConfirmationComponent,
+    ForgotPasswordComponent
   ],
     imports: [
         BrowserModule,
