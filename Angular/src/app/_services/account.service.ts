@@ -7,6 +7,7 @@ import {environment} from "../../environments/environment";
 import {PresenceService} from "./presence.service";
 import {CustomEncoder} from "../_models/custom-encoder";
 import {ForgotPassword} from "../_models/forgot-password";
+import {ResetPassword} from "../_models/reset-password";
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,11 @@ export class AccountService {
   public forgotPassword = (route: string, body: ForgotPassword) => {
     return this.http.post(this.baseUrl + 'account/ForgotPassword', body);
   }
+
+  public resetPassword = (route: string, body: ResetPassword) => {
+    return this.http.post(this.baseUrl + 'account/ResetPassword', body);
+  }
+
 
   setCurrentUser(user: User) {
     user.roles = [];

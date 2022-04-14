@@ -42,6 +42,7 @@ import { FeedCardComponent } from './feed-card/feed-card.component';
 import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FeedCardComponent,
     WhoToFollowComponent,
     EmailConfirmationComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
     imports: [
         BrowserModule,
