@@ -9,6 +9,7 @@ namespace BLL.Interfaces
         IMessageRepository MessageRepository { get; }
         ILikesRepository LikesRepository { get; }
         ICommentRepository CommentRepository { get; }
+        IFollowsRepository FollowsRepository { get; }
 
         Task<bool> Complete();
         bool HasChanges();
