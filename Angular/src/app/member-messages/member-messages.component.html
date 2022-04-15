@@ -39,7 +39,7 @@
                 <!-- my message-->
                 <div class="flex lg:items-center flex-row-reverse">
                   <div class="w-14 h-14 rounded-full relative flex-shrink-0">
-                    <img src="{{message.senderPhotoUrl}}" alt="{{message.senderUsername}}"
+                    <img src="{{message.senderPhotoUrl || '../../assets/user.png'}}" alt="{{message.senderUsername}}"
                          class="absolute h-full rounded-full w-full">
                   </div>
 
