@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {MembersService} from "../_services/members.service";
 import {Member} from "../_models/member";
 import {Pagination} from "../_models/pagination";
@@ -26,10 +26,14 @@ export class FeedComponent implements OnInit {
   }
 
   getPhotoForMember() {
+
     let photo: Photo;
     for (const member of this.members) {
-      photo = member.photos[member.photos.length - 1];
+      console.log(member.photos);
+      photo = member.photos?.slice(-1)[0];
+
     }
+    console.log(photo);
     return photo;
   }
 

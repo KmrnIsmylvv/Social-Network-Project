@@ -21,6 +21,7 @@ namespace BLL.Helpers.Extensions
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IGoogleAuthService, GoogleAuthService>();
             services.AddScoped<LogUserActivity>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

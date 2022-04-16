@@ -3,6 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SocialLoginModule, SocialAuthService,SocialAuthServiceConfig} from "angularx-social-login";
+import {GoogleLoginProvider} from "angularx-social-login";
 
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './navbar/navbar.component';
@@ -26,23 +28,23 @@ import {JwtInterceptor} from "./_interceptor/jwt.interceptor";
 import {SettingsPhotoComponent} from './settings-photo/settings-photo.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {LoadingInterceptor} from "./_interceptor/loading.interceptor";
-import { TextInputComponent } from './_forms/text-input/text-input.component';
-import { DateInputComponent } from './_forms/date-input/date-input.component';
-import { LikeListsComponent } from './like-lists/like-lists.component';
-import { MemberMessagesComponent } from './member-messages/member-messages.component';
-import { ConversationComponent } from './conversation/conversation.component';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
-import { HasRoleDirective } from './_directives/has-role.directive';
-import { UserManagementComponent } from './admin/user-management/user-management.component';
-import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import {TextInputComponent} from './_forms/text-input/text-input.component';
+import {DateInputComponent} from './_forms/date-input/date-input.component';
+import {LikeListsComponent} from './like-lists/like-lists.component';
+import {MemberMessagesComponent} from './member-messages/member-messages.component';
+import {ConversationComponent} from './conversation/conversation.component';
+import {AdminPanelComponent} from './admin/admin-panel/admin-panel.component';
+import {HasRoleDirective} from './_directives/has-role.directive';
+import {UserManagementComponent} from './admin/user-management/user-management.component';
+import {PhotoManagementComponent} from './admin/photo-management/photo-management.component';
 import {TabsModule} from "ngx-bootstrap/tabs";
-import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
-import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
-import { FeedCardComponent } from './feed-card/feed-card.component';
-import { WhoToFollowComponent } from './who-to-follow/who-to-follow.component';
-import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {RolesModalComponent} from './modals/roles-modal/roles-modal.component';
+import {ConfirmDialogComponent} from './modals/confirm-dialog/confirm-dialog.component';
+import {FeedCardComponent} from './feed-card/feed-card.component';
+import {WhoToFollowComponent} from './who-to-follow/who-to-follow.component';
+import {EmailConfirmationComponent} from './email-confirmation/email-confirmation.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -80,21 +82,36 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ForgotPasswordComponent,
     ResetPasswordComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SharedModule,
-        NgxSpinnerModule,
-        TabsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    NgxSpinnerModule,
+    TabsModule,
+  ],
   providers: [
+    SocialAuthService,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '363442922656-d5ifh3mk1i6670o426sf3j30opgk9ak8.apps.googleusercontent.com'
+            )
+          },
+        ],
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

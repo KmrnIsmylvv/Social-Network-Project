@@ -64,13 +64,31 @@
   text-shadow: 0 -1px 0 rgba(0,0,20,.4);
   text-decoration: none;
   line-height: 1;
-  position: relative;
-  border-radius: 5px;"
+        position: relative;
+        border-radius: 5px;"
           size="huge"
           class="fb icon-brand-facebook"
           (click)="facebookLogin()"
-        >  Login with Facebook
+        > Continue with Facebook
         </button>
+
+        <a (click)="googleLogin()" class="btn btn-outline-dark " role="button"
+           style="text-transform:none;font-family: Lucida Grande, Helvetica Neue, Helvetica, Arial, sans-serif;
+           background-color: floralwhite;
+           width: 237px;
+           display: inline-block;
+           margin-left: 120px;
+           margin-top: 25px;
+           font-size: 14px;
+           padding: 13px 30px 15px 44px;text-shadow: 0 -1px 0 rgba(0,0,20,.4);
+           text-decoration: none;
+           line-height: 1;
+           position: relative;
+           border-radius: 5px;"
+           size="huge"
+           ><i class="icon-brand-google"></i>
+            Continue with Google
+        </a>
         <div class="text-center mt-5 space-x-2">
           <p class="text-base"> Not registered? <a [routerLink]="['../register']"> Create a account </a></p>
         </div>

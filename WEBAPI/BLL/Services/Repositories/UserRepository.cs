@@ -39,7 +39,9 @@ namespace BLL.Services.Repositories
 
         public async Task<AppUser> GetUserById(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users
+                .Include(p => p.Photos)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<AppUser> GetUserByUsername(string username)

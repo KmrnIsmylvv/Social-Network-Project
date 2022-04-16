@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@abacritt/angularx-social-login": "^1.0.2",
     "@angular/animations": "~13.2.0",
     "@angular/cdk": "^13.3.0",
     "@angular/common": "~13.2.0",
@@ -20,8 +21,10 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@microsoft/signalr": "^6.0.3",
+    "angularx-social-login": "^4.1.0",
     "bootstrap": "^4.6.1",
     "font-awesome": "^4.7.0",
+    "google-auth-library": "^8.0.0",
     "ionicons": "^6.0.1",
     "jquery": "^3.6.0",
     "ng2-file-upload": "^1.4.0",

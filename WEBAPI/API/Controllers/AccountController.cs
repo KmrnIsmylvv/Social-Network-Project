@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTOs;
+using BLL.Helpers.Utils;
 using BLL.Interfaces;
+using BLL.Services;
 using DAL.Data;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http.Features;
@@ -32,10 +34,12 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IEmailSender _emailSender;
         private readonly IConfiguration _config;
+        private readonly IGoogleAuthService _googleAuthService;
         private readonly HttpClient _httpClient;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IMapper mapper, IEmailSender emailSender, IConfiguration config)
+            ITokenService tokenService, IMapper mapper, IEmailSender emailSender, IConfiguration config,
+            IGoogleAuthService googleAuthService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -43,6 +47,7 @@ namespace API.Controllers
             _mapper = mapper;
             _emailSender = emailSender;
             _config = config;
+            _googleAuthService = googleAuthService;
             _httpClient = new HttpClient
             {
                 BaseAddress = new System.Uri("https://graph.facebook.com")
@@ -115,6 +120,38 @@ namespace API.Controllers
             };
         }
 
+        [HttpPost("GoogleLogin")]
+        public async Task<IActionResult> GoogleLogin([FromBody] GoogleAuthDto googleAuthDto)
+        {
+            var payload = await _googleAuthService.VerifyGoogleToken(googleAuthDto);
+
+            if (payload == null) return BadRequest("Invalid Google Authentication");
+
+            var info = new UserLoginInfo(googleAuthDto.Provider, payload.Subject, googleAuthDto.Provider);
+
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
+
+            if (user == null)
+            {
+                user = new AppUser {Email = payload.Email, UserName = payload.Name};
+                await _userManager.CreateAsync(user);
+
+                await _userManager.AddToRoleAsync(user, "Member");
+                await _userManager.AddLoginAsync(user, info);
+            }
+            else
+            {
+                await _userManager.AddLoginAsync(user, info);
+            }
+
+            // if (user == null) return BadRequest("Invalid Google Authentication");
+
+            var token = await _tokenService.CreateToken(user);
+
+            return Ok(new AuthResponseDto {Username = user.UserName,Token = token, IsAuthSuccessful = true});
+        }
+
         [HttpPost("fbLogin")]
         public async Task<ActionResult<UserDto>> FacebookLogin(string accessToken)
         {
@@ -159,7 +196,7 @@ namespace API.Controllers
 
             user.EmailConfirmed = true;
 
-            var result = await _userManager.CreateAsync(user); // Invalid Username
+            var result = await _userManager.CreateAsync(user);
 
             if (!result.Succeeded) return BadRequest("Problem creating user account");
 

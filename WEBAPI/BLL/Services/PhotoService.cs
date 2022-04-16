@@ -3,6 +3,8 @@ using BLL.Helpers.Utils;
 using BLL.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using DAL.Data;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -10,10 +12,12 @@ namespace BLL.Services
 {
     public class PhotoService : IPhotoService
     {
+        private readonly DataContext _context;
         private readonly Cloudinary _cloudinary;
 
-        public PhotoService(IOptions<CloudinarySettings> config)
+        public PhotoService(IOptions<CloudinarySettings> config, DataContext context)
         {
+            _context = context;
             var acc = new Account
             (
                 config.Value.CloudName,
@@ -50,5 +54,11 @@ namespace BLL.Services
 
             return result;
         }
+
+        // public async Task<Photo> GetPhoto(int photoId)
+        // {
+        //     
+        //     return await 
+        // }
     }
 }

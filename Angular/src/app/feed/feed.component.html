@@ -9,8 +9,10 @@
 
 
 <div class="mr-5 mt-5" *ngFor="let member of members">
-  <app-feed-card [photo]="photo" [member]="member"></app-feed-card>
+  <app-feed-card [photo]="member.photos.slice(-1)[0]"  [member]="member"></app-feed-card>
 </div>
+
+
 
 
 
