@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,10 +14,13 @@ using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.ObjectPool;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -27,15 +31,22 @@ namespace API.Controllers
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _config;
+        private readonly HttpClient _httpClient;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            ITokenService tokenService, IMapper mapper, IEmailSender emailSender)
+            ITokenService tokenService, IMapper mapper, IEmailSender emailSender, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
             _mapper = mapper;
             _emailSender = emailSender;
+            _config = config;
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new System.Uri("https://graph.facebook.com")
+            };
         }
 
         [HttpPost("register")]
@@ -104,6 +115,68 @@ namespace API.Controllers
             };
         }
 
+        [HttpPost("fbLogin")]
+        public async Task<ActionResult<UserDto>> FacebookLogin(string accessToken)
+        {
+            var fbVerifyKeys = _config["Facebook:AppId"] + "|" + _config["Facebook:AppSecret"];
+
+            var verifyToken = await _httpClient
+                .GetAsync($"debug_token?input_token={accessToken}&access_token={fbVerifyKeys}");
+
+            if (!verifyToken.IsSuccessStatusCode) return Unauthorized();
+
+            var fbUrl = $"me?access_token={accessToken}&fields=name,email,picture.width(100).height(100)";
+
+            var response = await _httpClient.GetAsync(fbUrl);
+
+            if (!response.IsSuccessStatusCode) return Unauthorized();
+
+            var fbInfo = JsonConvert.DeserializeObject<dynamic>(await response.Content.ReadAsStringAsync());
+
+            var username = (string) fbInfo.id;
+
+            var user = await _userManager.Users
+                .Include(p => p.Photos)
+                .FirstOrDefaultAsync(u => u.UserName == username);
+
+            if (user != null) return await CreateUserObject(user);
+
+            user = new AppUser
+            {
+                KnownAs = (string) fbInfo.name,
+                Email = (string) fbInfo.email,
+                UserName = (string) fbInfo.id,
+                Photos = new List<Photo>
+                {
+                    new Photo
+                    {
+                        Id = fbInfo.id,
+                        Url = fbInfo.picture.data.url,
+                        IsMain = true
+                    }
+                }
+            };
+
+            user.EmailConfirmed = true;
+
+            var result = await _userManager.CreateAsync(user); // Invalid Username
+
+            if (!result.Succeeded) return BadRequest("Problem creating user account");
+
+            return await CreateUserObject(user);
+        }
+
+        private async Task<UserDto> CreateUserObject(AppUser user)
+        {
+            return new UserDto
+            {
+                KnownAs = user.KnownAs,
+                PhotoUrl = user?.Photos?.FirstOrDefault(p => p.IsMain)?.Url,
+                Token = await _tokenService.CreateToken(user),
+                Username = user.UserName
+            };
+        }
+
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
@@ -167,7 +240,7 @@ namespace API.Controllers
 
                 return BadRequest(new {Errors = errors});
             }
-            
+
             return Ok();
         }
     }

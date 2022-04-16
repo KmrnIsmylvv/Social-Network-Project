@@ -41,7 +41,7 @@ namespace API.Controllers
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
         public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
-        
+
         {
             var selectedRoles = roles.Split(",").ToArray();
 

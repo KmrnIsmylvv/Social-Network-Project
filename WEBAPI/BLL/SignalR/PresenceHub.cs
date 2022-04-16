@@ -35,6 +35,6 @@ namespace BLL.SignalR
                 await Clients.Others.SendAsync("UserIsOffline", Context.User.GetUsername());
 
             await base.OnDisconnectedAsync(exception);
-        } 
+        }
     }
 }

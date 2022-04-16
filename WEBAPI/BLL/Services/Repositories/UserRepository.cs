@@ -78,8 +78,8 @@ namespace BLL.Services.Repositories
         {
             return await _context.Users
                 .Where(x => x.UserName == username)
-                .Include(f=>f.Followings)
-                .Include(f=>f.Followers)
+                .Include(f => f.Followings)
+                .Include(f => f.Followers)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }

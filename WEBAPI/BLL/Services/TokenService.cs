@@ -32,7 +32,7 @@ namespace BLL.Services
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };
 
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles =await _userManager.GetRolesAsync(user);
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 

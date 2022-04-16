@@ -41,16 +41,11 @@ namespace API.Controllers
                     ObserverId = observerId,
                     TargetId = target.Id
                 };
-                
             }
             else
             {
-                
             }
 
-            
-
-            
 
             if (await _unitOfWork.Complete()) return Ok();
 
@@ -78,7 +73,6 @@ namespace API.Controllers
                 TargetId = target.Id
             };
 
-            
 
             if (await _unitOfWork.Complete()) return Ok();
 

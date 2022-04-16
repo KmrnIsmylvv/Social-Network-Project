@@ -7,7 +7,7 @@ using SQLitePCL;
 
 namespace API.Controllers
 {
-    public class CommentsController: BaseApiController
+    public class CommentsController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -17,7 +17,5 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
-       
     }
 }

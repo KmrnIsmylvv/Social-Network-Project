@@ -37,9 +37,7 @@ namespace API
                     .AllowCredentials());
             });
 
-            
 
-            
             services.AddSignalR();
             services.AddIdentityServices(_config);
 

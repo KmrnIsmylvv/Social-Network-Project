@@ -10,6 +10,8 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
     '../../assets/css/tailwind.css', '../../assets/css/uikit.css']
 })
 export class LoginComponent implements OnInit {
+  fbAccessToken: string | null = null;
+  fbLoading = false;
 
   model: any = {};
 
@@ -28,9 +30,31 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  getFacebookLoginStatus = async () => {
+    window.FB.getLoginStatus((response: { status: string; authResponse: { accessToken: string; }; }) => {
+      if (response.status === 'connected') {
+        this.fbAccessToken = response.authResponse.accessToken;
+      }
+    })
+  }
+
   facebookLogin = () => {
-    window.FB.login((response: any) => {
-      console.log(response);
-    }, {scope: 'public_profile,email'})
+    this.fbLoading = true;
+    const apiLogin = (accesToken: string) => {
+      this.accountService.fbLogin(accesToken).subscribe(user => {
+        this.fbLoading = false;
+        this.router.navigateByUrl('/feed');
+      }, error => {
+        console.log(error);
+        this.fbLoading = false;
+      })
+    }
+    if (this.fbAccessToken) {
+      apiLogin(this.fbAccessToken);
+    } else {
+      window.FB.login((response: { authResponse: { accessToken: string; }; }) => {
+        apiLogin(response.authResponse.accessToken);
+      }, {scope: 'public_profile,email'})
+    }
   }
 }

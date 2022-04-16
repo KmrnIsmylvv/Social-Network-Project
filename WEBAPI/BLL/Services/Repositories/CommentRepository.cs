@@ -30,6 +30,5 @@ namespace BLL.Services.Repositories
         {
             return await _context.Comments.FindAsync(id);
         }
-        
     }
 }

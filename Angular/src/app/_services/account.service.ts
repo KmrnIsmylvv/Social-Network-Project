@@ -33,7 +33,15 @@ export class AccountService {
   }
 
   fbLogin(accessToken: string) {
-    return this.http.post(this.baseUrl + `account/fbLogin?accessToken=${accessToken}`, {});
+    return this.http.post(this.baseUrl + `account/fbLogin?accessToken=${accessToken}`, {}).pipe(
+      map((response: any) => {
+        const user = response;
+        if (user) {
+          this.setCurrentUser(user);
+          this.presence.createHubConnection(user);
+        }
+      })
+    )
   }
 
   register(model: any) {
