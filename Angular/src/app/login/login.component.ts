@@ -10,6 +10,7 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
     '../../assets/css/tailwind.css', '../../assets/css/uikit.css']
 })
 export class LoginComponent implements OnInit {
+
   model: any = {};
 
   constructor(public accountService: AccountService, private router: Router,
@@ -25,5 +26,11 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.toastr.error(error.error);
     })
+  }
+
+  facebookLogin = () => {
+    window.FB.login((response: any) => {
+      console.log(response);
+    }, {scope: 'public_profile,email'})
   }
 }

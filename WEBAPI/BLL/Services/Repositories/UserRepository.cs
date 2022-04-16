@@ -46,6 +46,8 @@ namespace BLL.Services.Repositories
         {
             return await _context.Users
                 .Include(u => u.Photos)
+                .Include(f => f.Followings)
+                .Include(f => f.Followers)
                 .SingleOrDefaultAsync(u => u.UserName == username);
         }
 
@@ -76,6 +78,8 @@ namespace BLL.Services.Repositories
         {
             return await _context.Users
                 .Where(x => x.UserName == username)
+                .Include(f=>f.Followings)
+                .Include(f=>f.Followers)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }

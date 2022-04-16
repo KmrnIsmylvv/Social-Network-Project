@@ -21,7 +21,7 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost("{username}")]
+        [HttpPost("follow/{username}")]
         public async Task<ActionResult> Follow(string username)
         {
             var observerId = User.GetUserId();
@@ -34,7 +34,43 @@ namespace API.Controllers
 
             var followingUser = await _unitOfWork.FollowsRepository.GetUserFollow(observerId, target.Id);
 
-            if (followingUser != null) return BadRequest("You already follow this user");
+            if (followingUser == null)
+            {
+                followingUser = new UserFollowing
+                {
+                    ObserverId = observerId,
+                    TargetId = target.Id
+                };
+                
+            }
+            else
+            {
+                
+            }
+
+            
+
+            
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to follow");
+        }
+
+        [HttpPost("unfollow/{username}")]
+        public async Task<ActionResult> Unfollow(string username)
+        {
+            var observerId = User.GetUserId();
+            var target = await _unitOfWork.UserRepository.GetUserByUsername(username);
+            var observer = await _unitOfWork.FollowsRepository.GetUserWithFollows(observerId);
+
+            if (target == null) return NotFound();
+
+            if (observer.UserName == username) return BadRequest("You cannot unfollow yourself");
+
+            var followingUser = await _unitOfWork.FollowsRepository.GetUserFollow(observerId, target.Id);
+
+            if (followingUser == null) return BadRequest("You already unfollow this user");
 
             followingUser = new UserFollowing
             {
@@ -42,11 +78,11 @@ namespace API.Controllers
                 TargetId = target.Id
             };
 
-            observer.Followings.Add(followingUser);
+            
 
             if (await _unitOfWork.Complete()) return Ok();
 
-            return BadRequest("Failed to follow");
+            return BadRequest("Failed to unfollow");
         }
 
         [HttpGet]

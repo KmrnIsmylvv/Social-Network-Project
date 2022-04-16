@@ -26,6 +26,16 @@ export class MembersService {
     })
   }
 
+  follow(username: string) {
+    return this.http.post(this.baseUrl + 'follows/' + username, {});
+  }
+
+  getFollows(predicate: string, pageNumber: number, pageSize: number) {
+    let params = getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'follows', params, this.http);
+  }
+
   addLike(username: string) {
     return this.http.post(this.baseUrl + 'likes/' + username, {});
   }

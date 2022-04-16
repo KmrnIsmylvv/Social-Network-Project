@@ -32,6 +32,10 @@ export class AccountService {
     )
   }
 
+  fbLogin(accessToken: string) {
+    return this.http.post(this.baseUrl + `account/fbLogin?accessToken=${accessToken}`, {});
+  }
+
   register(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
@@ -58,7 +62,6 @@ export class AccountService {
   public resetPassword = (route: string, body: ResetPassword) => {
     return this.http.post(this.baseUrl + 'account/ResetPassword', body);
   }
-
 
   setCurrentUser(user: User) {
     user.roles = [];

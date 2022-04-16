@@ -30,8 +30,13 @@ namespace BLL.Helpers.Utils
                     a.MapFrom(src => src.Author.UserName))
                 .ForMember(p => p.PhotoUrl, o =>
                     o.MapFrom(src => src.Author.Photos.FirstOrDefault(x => x.IsMain).Url));
-            
+
             CreateMap<Photo, PhotoDto>();
+            CreateMap<AppUser, FollowDto>()
+                .ForMember(dest => dest.PhotoUrl, opt =>
+                    opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(dest => dest.Age, opt =>
+                    opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
         }

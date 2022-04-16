@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Photo} from "../_models/photo";
 import {ToastrService} from "ngx-toastr";
 import {PresenceService} from "../_services/presence.service";
+import {Followers} from "../_models/followers";
 
 @Component({
   selector: 'app-explore-detail',
@@ -15,6 +16,8 @@ import {PresenceService} from "../_services/presence.service";
 export class ExploreDetailComponent implements OnInit {
   member: Member;
   photos: Photo[];
+  // followersCount: number ;
+  followers: Followers[];
 
   constructor(private memberService: MembersService, private route: ActivatedRoute,
               private toastr: ToastrService, public presence: PresenceService) {
@@ -38,10 +41,22 @@ export class ExploreDetailComponent implements OnInit {
     return photos;
   }
 
+  getFollowers() {
+    const followers: Followers[] = [];
+    // for (let i = 0; i <= followers.length; i++) {
+    //   followers.push(followers[i]);
+    // }
+    for (const follower of this.member.followers) {
+      followers.push(follower);
+    }
+    return followers;
+  }
+
   loadMember() {
     this.memberService.getMember(this.route.snapshot.paramMap.get('username')).subscribe(member => {
       this.member = member;
       this.photos = this.getPhotos();
+      this.followers = this.getFollowers();
     })
   }
 }
