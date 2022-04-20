@@ -1,3 +1,3 @@
 # Social-Network-Project
 
-> ASP.NET Core WebAPI & Angular
+>  ASP.NET Core WebAPI & Angular
